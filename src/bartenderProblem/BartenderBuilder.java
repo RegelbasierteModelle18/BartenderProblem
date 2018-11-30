@@ -1,5 +1,8 @@
 package bartenderProblem;
 
+import java.util.Random;
+
+import bartenderProblem.EnvironmentElement.Type;
 import repast.simphony.context.Context;
 import repast.simphony.context.space.continuous.ContinuousSpaceFactory;
 import repast.simphony.context.space.continuous.ContinuousSpaceFactoryFinder;
@@ -26,6 +29,17 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		ContinuousSpaceFactory spaceFactory = ContinuousSpaceFactoryFinder.createContinuousSpaceFactory(null);
 		ContinuousSpace<Object> space = spaceFactory.createContinuousSpace("Continuous Space", context, new RandomCartesianAdder<Object>(),
 				new repast.simphony.space.continuous.BouncyBorders(), xdim, ydim, 1);
+		
+		// create random environment for testing purposes
+		for (int i = 0; i < xdim; i++) {
+			for (int j = 0; j < ydim; j++) {
+				Type type = Type.values()[new Random().nextInt(Type.values().length)];
+				EnvironmentElement element = new EnvironmentElement(type);
+				context.add(element);
+				grid.moveTo(element, i, j);
+				space.moveTo(element, i + 0.5, j + 0.5, 0);
+			}
+		}
 		
 		return context;
 	}
