@@ -1,3 +1,4 @@
 <context id="BartenderProblem" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://repast.org/scenario/context">
-  	
+	<projection id="Simple Grid" type="grid" />
+	<projection id="Continuous Space" type="continuous space" />
 </context>
