@@ -3,6 +3,7 @@ package bartenderProblem;
 import java.util.Random;
 
 import bartenderProblem.EnvironmentElement.Type;
+import bartenderProblem.actors.bartender.StupidBartender;
 import repast.simphony.context.Context;
 import repast.simphony.context.space.continuous.ContinuousSpaceFactory;
 import repast.simphony.context.space.continuous.ContinuousSpaceFactoryFinder;
@@ -29,6 +30,8 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		ContinuousSpaceFactory spaceFactory = ContinuousSpaceFactoryFinder.createContinuousSpaceFactory(null);
 		ContinuousSpace<Object> space = spaceFactory.createContinuousSpace("Continuous Space", context, new RandomCartesianAdder<Object>(),
 				new repast.simphony.space.continuous.BouncyBorders(), xdim, ydim, 1);
+		
+		context.add(new StupidBartender());
 		
 		// create random environment for testing purposes
 		for (int i = 0; i < xdim; i++) {

@@ -6,6 +6,10 @@
       <string>bartenderProblem.EnvironmentElement</string>
       <string>bartenderProblem.EnvironmentStyle2D</string>
     </entry>
+    <entry>
+      <string>bartenderProblem.actors.bartender.StupidBartender</string>
+      <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
+    </entry>
   </styles>
   <editedStyles>
     <entry>
@@ -23,7 +27,7 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>33752765</hashCode>
+    <hashCode>372447921</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
   <layoutProjection>Continuous Space</layoutProjection>
@@ -31,6 +35,10 @@
   <layerOrder>
     <entry>
       <string>bartenderProblem.EnvironmentElement</string>
+      <int>1</int>
+    </entry>
+    <entry>
+      <string>bartenderProblem.actors.bartender.StupidBartender</string>
       <int>0</int>
     </entry>
   </layerOrder>
