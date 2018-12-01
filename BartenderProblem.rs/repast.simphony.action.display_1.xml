@@ -3,18 +3,30 @@
   <type>2D</type>
   <styles>
     <entry>
-      <string>bartenderProblem.EnvironmentElement</string>
-      <string>bartenderProblem.EnvironmentStyle2D</string>
+      <string>bartenderProblem.environment.EnvironmentElement</string>
+      <string>bartenderProblem.environment.EnvironmentStyle2D</string>
+    </entry>
+    <entry>
+      <string>bartenderProblem.actors.Guest</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
       <string>bartenderProblem.actors.bartender.StupidBartender</string>
-      <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
   </styles>
   <editedStyles>
     <entry>
-      <string>bartenderProblem.EnvironmentElement</string>
+      <string>bartenderProblem.environment.EnvironmentElement</string>
       <null/>
+    </entry>
+    <entry>
+      <string>bartenderProblem.actors.Guest</string>
+      <string>bartenderProblem.actors.Guest.style_4.xml</string>
+    </entry>
+    <entry>
+      <string>bartenderProblem.actors.bartender.StupidBartender</string>
+      <string>bartenderProblem.actors.bartender.StupidBartender.style_4.xml</string>
     </entry>
   </editedStyles>
   <netStyles/>
@@ -27,19 +39,23 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>372447921</hashCode>
+    <hashCode>-953595415</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
-  <layoutProjection>Continuous Space</layoutProjection>
+  <layoutProjection>Simple Grid</layoutProjection>
   <layoutInterval>0</layoutInterval>
   <layerOrder>
     <entry>
-      <string>bartenderProblem.EnvironmentElement</string>
-      <int>1</int>
+      <string>bartenderProblem.environment.EnvironmentElement</string>
+      <int>0</int>
+    </entry>
+    <entry>
+      <string>bartenderProblem.actors.Guest</string>
+      <int>2</int>
     </entry>
     <entry>
       <string>bartenderProblem.actors.bartender.StupidBartender</string>
-      <int>0</int>
+      <int>1</int>
     </entry>
   </layerOrder>
   <projections>
@@ -101,7 +117,7 @@
               </entry>
               <entry>
                 <string>SHOW</string>
-                <boolean>true</boolean>
+                <boolean>false</boolean>
               </entry>
             </map>
           </entry>

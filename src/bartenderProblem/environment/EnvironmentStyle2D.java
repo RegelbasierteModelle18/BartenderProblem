@@ -1,4 +1,4 @@
-package bartenderProblem;
+package bartenderProblem.environment;
 
 import java.awt.Color;
 
