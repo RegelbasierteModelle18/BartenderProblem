@@ -10,7 +10,11 @@ public class StupidBartender extends Bartender {
 		return 0;
 	}
 	
-	protected void handlePersonCommunication(Guest guest) {
-		// take order or hand over drink
+	protected void handleDelivery(Guest guest) {
+		
+	}
+
+	protected void handleOrder(Guest guest) {
+		
 	}
 }

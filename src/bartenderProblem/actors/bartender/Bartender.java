@@ -24,5 +24,7 @@ public abstract class Bartender {
 	
 	protected abstract double calculateHeading();
 
-	protected abstract void handlePersonCommunication(Guest guest);
+	protected abstract void handleDelivery(Guest guest);
+
+	protected abstract void handleOrder(Guest guest);
 }
