@@ -39,6 +39,27 @@ Die perfekte Zusammensetzung aus Barkeepern und Gästen, sodass sowohl Barkeeper
 - Barkeeper-Langeweilegrenze
 - Gast-Wartegrenze
 
+## Verhalten der Agenten
+
+### Bartender
+
+1.  Strategie 1:
+    Die Bestellungsliste der Bartenders wird in einer Queue realisiert
+    Barkeeper geht immer einmal alle Gäste ab und ruft bei Gast ein order() auf, nimmt somit die Bestellung auf, oder eben nicht
+
+
+2.  Strategie 2:
+
+### Gast
+Der Gast verhält sich wie folgt:
+
+    1.  spawnen
+    2.  Platz suchen
+    3.  zyklus solange durst nicht maxthirst:
+        - Bartender ablehnen wenn noch nicht threshold
+        - bestellen wenn threshold
+        - warten
+
 ## Denkbare Erweiterungen
 
 Folgende Erweiterungen für das Projekt sind denkbar:

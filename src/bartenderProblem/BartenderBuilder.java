@@ -23,7 +23,7 @@ import repast.simphony.space.grid.RandomGridAdder;
 
 public class BartenderBuilder implements ContextBuilder<Object> {
 	public Context<Object> build(Context<Object> context) {
-		int xdim = 15, ydim = 15;
+		int xdim = 50, ydim = 50;
 		
 		// grid for environment
 		GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);
