@@ -42,7 +42,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 			public void onTick(Context<Object> context, Grid<Object> grid, ContinuousSpace<Object> space) {
 				// guest enters with the probability of 10%
 				if (new Random().nextInt(100) < 10) {
-					Guest guest = new Guest();
+					Guest guest = new Guest(0, 10, 100, 1);
 					context.add(guest);
 				}
 			}
