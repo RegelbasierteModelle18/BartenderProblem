@@ -53,13 +53,22 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		context.add(new StupidBartender(1, 1));
 		
 		// create random environment for testing purposes
-		for (int i = 0; i < xdim; i++) {
+		/*for (int i = 0; i < xdim; i++) {
 			for (int j = 0; j < ydim; j++) {
 				Type type = Type.values()[new Random().nextInt(Type.values().length)];
 				EnvironmentElement element = new EnvironmentElement(type);
 				context.add(element);
 				grid.moveTo(element, i, j);
 				space.moveTo(element, i + 0.5, j + 0.5, 0);
+			}
+		}
+		*/
+		for(int i = xdim - 4; i < xdim; i++){
+			for(int j = 0; j < jdim; j++){
+				EnvironmentElement elem = new EnvironmentElement(Type.BAR);
+				context.add(elem);
+				gird.moveTo(elem, i, j);
+				space.moveTo(elem, i, + 0.5, j + 0.5, 0);
 			}
 		}
 		
