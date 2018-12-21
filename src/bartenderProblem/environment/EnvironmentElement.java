@@ -28,8 +28,14 @@ public class EnvironmentElement {
 	}
 	
 	public enum Type {
-		TABLE (Color.GREEN),
-		FREE_SPACE (Color.BLACK);
+		// Table is kind of brown
+		TABLE (new Color(205,133,63)),
+		// free Space is kind of green
+		FREE_SPACE (new Color(152,251,152)),
+		// Bar is similar brown as TABLE
+		BAR(new Color(139,69,19)),
+		// entry is kind of yellow
+		ENTRY(new Color(250,250,210));
 		
 		private Color color;
 		
