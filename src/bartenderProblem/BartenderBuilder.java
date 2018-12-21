@@ -23,7 +23,7 @@ import repast.simphony.space.grid.RandomGridAdder;
 
 public class BartenderBuilder implements ContextBuilder<Object> {
 	public Context<Object> build(Context<Object> context) {
-		int xdim = 50, ydim = 50;
+		int xdim = 100, ydim = 50;
 		
 		// grid for environment
 		GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);
@@ -50,7 +50,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		
 		
 		context.add(TickHandler.getInstance());
-		context.add(new StupidBartender());
+		context.add(new StupidBartender(1, 1));
 		
 		// create random environment for testing purposes
 		for (int i = 0; i < xdim; i++) {

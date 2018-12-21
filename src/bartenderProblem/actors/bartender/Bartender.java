@@ -9,6 +9,14 @@ import repast.simphony.space.grid.Grid;
 import repast.simphony.util.ContextUtils;
 
 public abstract class Bartender {
+	
+	int deliveryRange, orderRange;
+	
+	public Bartender(int deliveryRange, int orderRange) {
+		this.deliveryRange = deliveryRange;
+		this.orderRange = orderRange;
+	}
+	
 	@ScheduledMethod(start = 1, interval = 1, shuffle=true)
 	public void step() {
 		Context<Object> context = ContextUtils.getContext(this);
@@ -22,9 +30,12 @@ public abstract class Bartender {
 		grid.moveTo(this, (int) point.getX(), (int) point.getY());
 	}
 	
+	// returns direction in radiant
 	protected abstract double calculateHeading();
-
+	
+	// so this in every step for each guest to deliver the order if available
 	protected abstract void handleDelivery(Guest guest);
 
+	// do this in every step for each guest to take new orders
 	protected abstract void handleOrder(Guest guest);
 }
