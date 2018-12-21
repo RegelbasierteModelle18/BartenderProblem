@@ -23,7 +23,7 @@ import repast.simphony.space.grid.RandomGridAdder;
 
 public class BartenderBuilder implements ContextBuilder<Object> {
 	public Context<Object> build(Context<Object> context) {
-		int xdim = 100, ydim = 50;
+		int xdim = 50, ydim = 50;
 		
 		// grid for environment
 		GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);
@@ -44,6 +44,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 				if (new Random().nextInt(100) < 10) {
 					Guest guest = new Guest(0, 10, 100, 1);
 					context.add(guest);
+					grid.moveTo(guest, xdim / 2 +(new Random().nextInt() % 3), 0 );
 				}
 			}
 		});
@@ -53,25 +54,32 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		context.add(new StupidBartender(1, 1));
 		
 		// create random environment for testing purposes
-		/*for (int i = 0; i < xdim; i++) {
+		Type type;
+		for (int i = 0; i < xdim; i++) {
 			for (int j = 0; j < ydim; j++) {
-				Type type = Type.values()[new Random().nextInt(Type.values().length)];
+				if(i > xdim - 4) {
+					type = Type.BAR;
+				} else if((i >= xdim / 2 - 2 && i <= xdim / 2 + 2) && j == 0){
+					//entry
+					type = Type.ENTRY;
+					
+				}else if(new Random().nextDouble() < 0.05  ) {
+					// desk
+					
+					type = Type.TABLE;
+					
+				} else {
+					//free space
+					
+					type = Type.FREE_SPACE;
+					//type = Type.values()[new Random().nextInt(Type.values().length)];
+				}
 				EnvironmentElement element = new EnvironmentElement(type);
 				context.add(element);
 				grid.moveTo(element, i, j);
 				space.moveTo(element, i + 0.5, j + 0.5, 0);
-			}
+			}	
 		}
-		*/
-		for(int i = xdim - 4; i < xdim; i++){
-			for(int j = 0; j < jdim; j++){
-				EnvironmentElement elem = new EnvironmentElement(Type.BAR);
-				context.add(elem);
-				gird.moveTo(elem, i, j);
-				space.moveTo(elem, i, + 0.5, j + 0.5, 0);
-			}
-		}
-		
 		return context;
 	}
 }

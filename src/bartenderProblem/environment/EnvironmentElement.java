@@ -31,11 +31,12 @@ public class EnvironmentElement {
 		// Table is kind of brown
 		TABLE (new Color(205,133,63)),
 		// free Space is kind of green
-		FREE_SPACE (new Color(152,251,152)),
+		FREE_SPACE (new Color(34,139,34)),
 		// Bar is similar brown as TABLE
 		BAR(new Color(139,69,19)),
 		// entry is kind of yellow
-		ENTRY(new Color(250,250,210));
+		ENTRY(new Color(250,250,210)),
+		WALL(new Color(47, 79, 79));
 		
 		private Color color;
 		
