@@ -14,7 +14,9 @@ import repast.simphony.context.space.continuous.ContinuousSpaceFactoryFinder;
 import repast.simphony.context.space.grid.GridFactory;
 import repast.simphony.context.space.grid.GridFactoryFinder;
 import repast.simphony.dataLoader.ContextBuilder;
+import repast.simphony.query.space.continuous.ContinuousWithin;
 import repast.simphony.space.continuous.ContinuousSpace;
+import repast.simphony.space.continuous.NdPoint;
 import repast.simphony.space.continuous.RandomCartesianAdder;
 import repast.simphony.space.grid.Grid;
 import repast.simphony.space.grid.GridBuilderParameters;
@@ -42,9 +44,26 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 			public void onTick(Context<Object> context, Grid<Object> grid, ContinuousSpace<Object> space) {
 				// guest enters with the probability of 10%
 				if (new Random().nextInt(100) < 10) {
-					Guest guest = new Guest(0, 10, 100, 1);
+					
+					// search table
+					EnvironmentElement table = Util.getRandomElement(Type.TABLE, context);
+					if(table == null) {
+						return;
+					}
+					
+					GridPoint tableLocation = grid.getLocation(table);
+					
+					// check for other guests that took seat on the same table
+					for (Object o : new ContinuousWithin(context, table, 0.5).query()) {
+						if (o instanceof Guest) {
+							return;
+						}
+					}
+					
+					// spawn guest
+					Guest guest = new Guest(0, 10, 1000, 1);
 					context.add(guest);
-					grid.moveTo(guest, xdim / 2 +(new Random().nextInt() % 3), 0 );
+					grid.moveTo(guest, tableLocation.getX(), tableLocation.getY());
 				}
 			}
 		});
