@@ -5,6 +5,7 @@ import bartenderProblem.environment.EnvironmentElement;
 import bartenderProblem.environment.EnvironmentElement.Type;
 import repast.simphony.context.Context;
 import repast.simphony.engine.schedule.ScheduledMethod;
+import repast.simphony.query.space.continuous.ContinuousWithin;
 import repast.simphony.space.continuous.ContinuousSpace;
 import repast.simphony.space.continuous.NdPoint;
 import repast.simphony.space.grid.Grid;
@@ -24,9 +25,22 @@ public abstract class Bartender {
 		Context<Object> context = ContextUtils.getContext(this);
 		Grid<Object> grid = (Grid<Object>) context.getProjection("Simple Grid");
 		ContinuousSpace<Object> space = (ContinuousSpace<Object>) context.getProjection("Continuous Space");
-				
-		// TODO: check for nearby guests
+			
+		// handle deliverys
+		for (Object o : new ContinuousWithin(context, this, deliveryRange).query()) {
+			if (o instanceof Guest) {
+				handleDelivery((Guest) o);
+			}
+		}
 		
+		// handle orders
+		for (Object o : new ContinuousWithin(context, this, orderRange).query()) {
+			if (o instanceof Guest) {
+				handleOrder((Guest) o);
+			}
+		}
+		
+		// move
 		double heading = calculateHeading(context);
 		space.moveByVector(this, 1, heading, 0, 0);
 		NdPoint point = space.getLocation(this);
