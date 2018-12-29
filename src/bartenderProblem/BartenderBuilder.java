@@ -46,7 +46,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 				if (new Random().nextInt(100) < 10) {
 					
 					// search table
-					EnvironmentElement table = Util.getRandomElement(Type.TABLE, context);
+					EnvironmentElement table = Util.getRandomEnvironmentElement(Type.TABLE, context);
 					if(table == null) {
 						return;
 					}

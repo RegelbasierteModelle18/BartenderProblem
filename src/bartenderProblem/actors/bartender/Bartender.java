@@ -1,6 +1,8 @@
 package bartenderProblem.actors.bartender;
 
 import bartenderProblem.actors.Guest;
+import bartenderProblem.environment.EnvironmentElement;
+import bartenderProblem.environment.EnvironmentElement.Type;
 import repast.simphony.context.Context;
 import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.space.continuous.ContinuousSpace;
@@ -25,13 +27,31 @@ public abstract class Bartender {
 				
 		// TODO: check for nearby guests
 		
-		space.moveByVector(this, 1, calculateHeading(),0,0);
+		double heading = calculateHeading(context);
+		space.moveByVector(this, 1, heading, 0, 0);
 		NdPoint point = space.getLocation(this);
-		grid.moveTo(this, (int) point.getX(), (int) point.getY());
+		
+		// check if bartender walks against table
+		boolean movedOnTable = false;
+		for (Object o : grid.getObjectsAt((int) point.getX(), (int) point.getY())) {
+			if (o instanceof EnvironmentElement) {
+				if (((EnvironmentElement) o).getType() == Type.TABLE) {
+					movedOnTable = true;
+					break;
+				}
+			}
+		}
+		
+		// if dumbass moved against table, pull back
+		if (movedOnTable) {
+			space.moveByVector(this, 1, (heading + Math.PI) % (2 * Math.PI), 0, 0);
+		} else {
+			grid.moveTo(this, (int) point.getX(), (int) point.getY());
+		}
 	}
 	
 	// returns direction in radiant
-	protected abstract double calculateHeading();
+	protected abstract double calculateHeading(Context<Object> context);
 	
 	// so this in every step for each guest to deliver the order if available
 	protected abstract void handleDelivery(Guest guest);
