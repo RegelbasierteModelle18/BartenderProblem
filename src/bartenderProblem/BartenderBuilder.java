@@ -25,6 +25,21 @@ import repast.simphony.space.grid.RandomGridAdder;
 
 public class BartenderBuilder implements ContextBuilder<Object> {
 	public Context<Object> build(Context<Object> context) {
+		Thread thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while(true) {
+					SoundHandler.BACKGROUNDMUSIC.play();
+					try {
+						Thread.sleep(8 * 60 * 1000 + 8 * 1000); // restart every 8 minutes and 8 seconds
+					} catch (InterruptedException e) {
+					}
+				}
+			}
+		});
+		thread.setDaemon(true);
+		thread.start();
+		
 		int xdim = 50, ydim = 50;
 		
 		// grid for environment
@@ -61,7 +76,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 					}
 					
 					// spawn guest
-					Guest guest = new Guest(0, 10, 1000, 1);
+					Guest guest = new Guest(0, 10, 100, 1);
 					context.add(guest);
 					grid.moveTo(guest, tableLocation.getX(), tableLocation.getY());
 				}
@@ -82,16 +97,15 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 					//entry
 					type = Type.ENTRY;
 					
-				}else if(new Random().nextDouble() < 0.05  ) {
+				}else if(new Random().nextDouble() < 0.02  ) {
 					// desk
-					
 					type = Type.TABLE;
 					
 				} else {
 					//free space
-					
 					type = Type.FREE_SPACE;
 					//type = Type.values()[new Random().nextInt(Type.values().length)];
+					
 				}
 				EnvironmentElement element = new EnvironmentElement(type);
 				context.add(element);

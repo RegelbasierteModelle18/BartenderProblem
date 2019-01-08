@@ -2,6 +2,7 @@ package bartenderProblem.actors;
 
 import java.util.Random;
 
+import bartenderProblem.SoundHandler;
 import repast.simphony.context.Context;
 import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.space.continuous.ContinuousSpace;
@@ -18,7 +19,9 @@ public class Guest {
 		this.thirst = thirst;
 		this.orderThreshold = orderThreshold;
 		this.maxThirst = maxThirst;
-		this.thirstGrowth = thirstGrowth;
+		this.thirstGrowth = thirstGrowth;	
+		SoundHandler.OPENDOOR.play();
+		
 	}
 	
 	@ScheduledMethod(start = 1, interval = 1, shuffle=true)
@@ -30,6 +33,7 @@ public class Guest {
 		thirst += thirstGrowth;
 		
 		if (thirst >= maxThirst) {
+			SoundHandler.CLOSEDOOR.play();
 			context.remove(this);
 		}
 	}

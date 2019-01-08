@@ -28,7 +28,7 @@ public class Util {
 		Grid<Object> grid = (Grid<Object>) context.getProjection("Simple Grid");
 		
 		LinkedList<EnvironmentElement> elements = new LinkedList<>();
-		
+		// mount everest:
 		for (int i = 0; i < grid.getDimensions().getWidth(); i++) {
 			for (int j = 0; j < grid.getDimensions().getHeight(); j++) {
 				for (Object o : grid.getObjectsAt(i, j)) {
