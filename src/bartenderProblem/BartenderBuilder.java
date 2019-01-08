@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import bartenderProblem.actors.Guest;
+import bartenderProblem.actors.bartender.RolandBranntwein;
 import bartenderProblem.actors.bartender.StupidBartender;
 import bartenderProblem.environment.EnvironmentElement;
 import bartenderProblem.environment.EnvironmentElement.Type;
@@ -86,6 +87,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		
 		context.add(TickHandler.getInstance());
 		context.add(new StupidBartender(1, 1));
+		context.add(new RolandBranntwein(1, 1, 1));
 		
 		// create random environment for testing purposes
 		Type type;
