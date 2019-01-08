@@ -55,7 +55,7 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>1834581507</hashCode>
+    <hashCode>488888912</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
   <layoutProjection>Simple Grid</layoutProjection>

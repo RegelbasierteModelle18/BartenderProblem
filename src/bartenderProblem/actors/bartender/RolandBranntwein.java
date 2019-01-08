@@ -52,4 +52,9 @@ public class RolandBranntwein extends Bartender{
 		
 	}
 	
+	@Override
+	protected void fillUp() {
+		// TODO Auto-generated method stub
+		
+	}
 }
