@@ -101,8 +101,6 @@ public class BartholomeusVonPilsner extends Bartender {
 				state = State.TAKE_ORDER;
 				this.guest = null;
 				drink = null;
-				
-				System.out.println("deliver");
 			}
 		}
 	}
@@ -115,12 +113,8 @@ public class BartholomeusVonPilsner extends Bartender {
 				if (drink == null) {
 					this.guest = null;
 					state = State.TAKE_ORDER;
-					
-					System.out.println("no drink for him");
 				} else {
 					state = State.FILL_UP;
-	
-					System.out.println("take order");
 				}
 			}
 		}
@@ -132,7 +126,6 @@ public class BartholomeusVonPilsner extends Bartender {
 			state = State.DELIVER;
 			
 			SoundHandler.FILL_UP.randomPlay();
-			System.out.println("fill up");
 		}
 	}
 	

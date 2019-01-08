@@ -31,7 +31,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 			@Override
 			public void run() {
 				while(true) {
-					SoundHandler.BACKGROUNDMUSIC.play();
+					//SoundHandler.BACKGROUNDMUSIC.play();
 					try {
 						Thread.sleep(8 * 60 * 1000 + 8 * 1000); // restart song every 8 minutes and 8 seconds
 					} catch (InterruptedException e) {
@@ -88,13 +88,16 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		
 		
 		context.add(TickHandler.getInstance());
+		
 		//context.add(new StupidBartender(1, 1));
-		//context.add(new RolandBranntwein(1, 1, 1));
-		for (int i = 0; i < 10; i++) {
-			context.add(new BartholomeusVonPilsner(2, 2));
+		
+		for (int i = 0; i < 1; i++) {
+			context.add(new RolandBranntwein(1, 1, 10));
+			//context.add(new BartholomeusVonPilsner(2, 2));
 		}
 		
 		// create random environment for testing purposes
+		int tableCount = 0;
 		Type type;
 		for (int i = 0; i < xdim; i++) {
 			for (int j = 0; j < ydim; j++) {
@@ -104,10 +107,10 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 					//entry
 					type = Type.ENTRY;
 					
-				}else if(new Random().nextDouble() < 0.07  ) {
+				}else if(new Random().nextDouble() < 0.1 ) {
 					// desk
 					type = Type.TABLE;
-					
+					tableCount++;
 				} else {
 					//free space
 					type = Type.FREE_SPACE;
@@ -120,6 +123,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 				space.moveTo(element, i + 0.5, j + 0.5, 0);
 			}	
 		}
+		context.add(new Statistics(tableCount));
 		return context;
 	}
 }

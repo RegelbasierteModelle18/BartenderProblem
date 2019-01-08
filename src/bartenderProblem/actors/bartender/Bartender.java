@@ -1,5 +1,9 @@
 package bartenderProblem.actors.bartender;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import bartenderProblem.Util;
 import bartenderProblem.actors.Guest;
 import bartenderProblem.environment.EnvironmentElement;
 import bartenderProblem.environment.EnvironmentElement.Type;
@@ -10,14 +14,17 @@ import repast.simphony.space.continuous.ContinuousSpace;
 import repast.simphony.space.continuous.NdPoint;
 import repast.simphony.space.grid.Grid;
 import repast.simphony.util.ContextUtils;
+import repast.simphony.util.collections.IndexedIterable;
 
 public abstract class Bartender {
 	
 	int deliveryRange, orderRange;
+	private Map<Guest, Integer> guestIdleTicks;
 	
 	public Bartender(int deliveryRange, int orderRange) {
 		this.deliveryRange = deliveryRange;
 		this.orderRange = orderRange;
+		guestIdleTicks = new HashMap<Guest, Integer>();
 	}
 	
 	@ScheduledMethod(start = 1, interval = 1, shuffle=true)
@@ -26,6 +33,24 @@ public abstract class Bartender {
 		Grid<Object> grid = (Grid<Object>) context.getProjection("Simple Grid");
 		ContinuousSpace<Object> space = (ContinuousSpace<Object>) context.getProjection("Continuous Space");
 			
+		// update GuestIdleTicks Map
+		for(Object guest : context.getObjects(Guest.class)) {
+			if(guestIdleTicks.containsKey((Guest) guest)) {
+				guestIdleTicks.put((Guest)guest, guestIdleTicks.get((Guest)guest) + 1);
+			} else {
+				guestIdleTicks.put((Guest) guest, 1);
+			}
+		}
+		// delete gone-guests from guestIdleTicks-Map
+		try {
+		for(Map.Entry<Guest, Integer> guest : guestIdleTicks.entrySet()) {
+			if(Util.getSpace(context).getLocation(guest.getKey()) == null) {
+				guestIdleTicks.remove(guest.getKey());
+				continue;
+			}
+		}
+		} catch (java.util.ConcurrentModificationException e) {
+		}
 		// handle deliverys
 		for (Object o : new ContinuousWithin(context, this, deliveryRange).query()) {
 			if (o instanceof Guest) {
@@ -73,6 +98,17 @@ public abstract class Bartender {
 		} else {
 			grid.moveTo(this, (int) point.getX(), (int) point.getY());
 		}
+	}
+	
+	public int getGuestIdleTicks(Guest guest) {
+		if(guestIdleTicks.containsKey(guest)) {
+			return guestIdleTicks.get(guest);
+		}
+		return 0;
+	}
+	
+	public Map<Guest, Integer> getGuestIdleTicks() {
+		return guestIdleTicks;
 	}
 	
 	public int count() {
