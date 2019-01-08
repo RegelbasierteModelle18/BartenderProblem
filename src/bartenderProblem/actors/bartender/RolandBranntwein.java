@@ -9,8 +9,10 @@ import bartenderProblem.actors.Guest;
 import bartenderProblem.environment.EnvironmentElement;
 import bartenderProblem.environment.EnvironmentElement.Type;
 import repast.simphony.context.Context;
+import repast.simphony.space.continuous.ContinuousSpace;
 import repast.simphony.space.continuous.NdPoint;
 import repast.simphony.space.grid.GridPoint;
+import repast.simphony.util.ContextUtils;
 
 /**
  * Roland Branntwein - ein Erbe des StupidBartender
@@ -24,6 +26,9 @@ import repast.simphony.space.grid.GridPoint;
 
 public class RolandBranntwein extends Bartender{
 	int storageLimit;		// how many drinks the bartender can hold at a time
+	double lastHeading = 0;
+	Context<Object> context = ContextUtils.getContext(this);
+	NdPoint myPosition =  Util.getSpace(context).getLocation(this);
 	
 	public RolandBranntwein(int deliveryRange, int orderRange, int storageLimit) {
 		super(deliveryRange, orderRange);
@@ -31,14 +36,19 @@ public class RolandBranntwein extends Bartender{
 	}
 	
 	protected double calculateHeading(Context<Object> context) {
-		return 0;
+		if(lastHeading < 2 * Math.PI) {
+			lastHeading += 0.2;
+		} else {
+			lastHeading = 0;
+		}
+		return lastHeading;
 	}
 	
 	protected void handleDelivery(Guest guest) {
 		
 	}
 
-	protected void handleOrder(Guest guest) {
+	protected void handleOrder(Guest guest) {	
 		
 	}
 	
