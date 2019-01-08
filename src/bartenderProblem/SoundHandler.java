@@ -1,28 +1,31 @@
 package bartenderProblem;
 
 import java.io.File;
+import java.io.IOException;
 
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javax.sound.sampled.*;
 
 public enum SoundHandler {
-	OPENDOOR("audio/opendoor.mp3"),
-	CLOSEDOOR("audio/closedoor.mp3"),
-	BACKGROUNDMUSIC("audio/bgmusic.mp3");
-	private String file;
+	OPENDOOR("audio/opendoor.wav"),
+	CLOSEDOOR("audio/closedoor.wav"),
+	BACKGROUNDMUSIC("audio/bgmusic.wav");
 	
-	static {
-		JFXPanel panel = new JFXPanel();
-	}
+	
+	private String file;
 	
 	private SoundHandler(String file) {
 		this.file = file;
 	}
 	
 	public void play() {
-		Media hit = new Media(new File(file).toURI().toString());
-		MediaPlayer mediaPlayer = new MediaPlayer(hit);
-		mediaPlayer.play();
+		try {
+			AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File(file));
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioIn);
+	        clip.start();
+		} catch (UnsupportedAudioFileException e) {
+		} catch (IOException e) {
+		} catch (LineUnavailableException e) {
+		}
 	}
 }
