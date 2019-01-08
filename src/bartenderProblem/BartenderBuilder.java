@@ -33,7 +33,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 				while(true) {
 					SoundHandler.BACKGROUNDMUSIC.play();
 					try {
-						Thread.sleep(8 * 60 * 1000 + 8 * 1000); // restart every 8 minutes and 8 seconds
+						Thread.sleep(8 * 60 * 1000 + 8 * 1000); // restart song every 8 minutes and 8 seconds
 					} catch (InterruptedException e) {
 					}
 				}

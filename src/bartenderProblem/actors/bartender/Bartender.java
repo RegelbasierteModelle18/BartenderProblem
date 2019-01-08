@@ -40,6 +40,17 @@ public abstract class Bartender {
 			}
 		}
 		
+		// check for bartender standing on bar
+		NdPoint currentLocation = space.getLocation(this);
+		for (Object o : grid.getObjectsAt((int) currentLocation.getX(), (int) currentLocation.getY())) {
+			if (o instanceof EnvironmentElement) {
+				if (((EnvironmentElement) o).getType() == Type.BAR) {
+					fillUp();
+					break;
+				}
+			}
+		}
+		
 		// move
 		double heading = calculateHeading(context);
 		space.moveByVector(this, 1, heading, 0, 0);
@@ -72,4 +83,7 @@ public abstract class Bartender {
 
 	// do this in every step for each guest to take new orders
 	protected abstract void handleOrder(Guest guest);
+	
+	// do this in every step the bartender is at the bar
+	protected abstract void fillUp();
 }

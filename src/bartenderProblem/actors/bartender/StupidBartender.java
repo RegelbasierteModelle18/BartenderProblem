@@ -57,4 +57,10 @@ public class StupidBartender extends Bartender {
 	protected void handleOrder(Guest guest) {
 		
 	}
+	
+	@Override
+	protected void fillUp() {
+		// TODO Auto-generated method stub
+		
+	}
 }
