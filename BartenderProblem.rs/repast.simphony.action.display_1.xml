@@ -1,4 +1,4 @@
-<repast.simphony.visualization.engine.CartesianDisplayDescriptor simphonyVersion="2.5.0">
+<repast.simphony.visualization.engine.CartesianDisplayDescriptor simphonyVersion="2.6.0">
   <name>Display</name>
   <type>2D</type>
   <styles>
@@ -16,6 +16,10 @@
     </entry>
     <entry>
       <string>bartenderProblem.actors.bartender.RolandBranntwein</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+    </entry>
+    <entry>
+      <string>bartenderProblem.actors.bartender.BartholomeusVonPilsner</string>
       <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
   </styles>
@@ -36,6 +40,10 @@
       <string>bartenderProblem.actors.bartender.RolandBranntwein</string>
       <string>bartenderProblem.actors.bartender.RolandBranntwein.style_4.xml</string>
     </entry>
+    <entry>
+      <string>bartenderProblem.actors.bartender.BartholomeusVonPilsner</string>
+      <string>bartenderProblem.actors.bartender.BartholomeusVonPilsner.style_3.xml</string>
+    </entry>
   </editedStyles>
   <netStyles/>
   <editedNetStyles/>
@@ -47,7 +55,7 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-1481414354</hashCode>
+    <hashCode>1848829865</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
   <layoutProjection>Simple Grid</layoutProjection>
@@ -55,19 +63,23 @@
   <layerOrder>
     <entry>
       <string>bartenderProblem.environment.EnvironmentElement</string>
-      <int>0</int>
+      <int>1</int>
     </entry>
     <entry>
       <string>bartenderProblem.actors.Guest</string>
-      <int>3</int>
+      <int>4</int>
     </entry>
     <entry>
       <string>bartenderProblem.actors.bartender.StupidBartender</string>
-      <int>2</int>
+      <int>3</int>
     </entry>
     <entry>
       <string>bartenderProblem.actors.bartender.RolandBranntwein</string>
-      <int>1</int>
+      <int>2</int>
+    </entry>
+    <entry>
+      <string>bartenderProblem.actors.bartender.BartholomeusVonPilsner</string>
+      <int>0</int>
     </entry>
   </layerOrder>
   <projections>
