@@ -20,7 +20,7 @@ public class Guest {
 		this.orderThreshold = orderThreshold;
 		this.maxThirst = maxThirst;
 		this.thirstGrowth = thirstGrowth;	
-		SoundHandler.OPENDOOR.play();
+		SoundHandler.OPENDOOR.randomPlay();
 		
 	}
 	
@@ -33,7 +33,7 @@ public class Guest {
 		thirst += thirstGrowth;
 		
 		if (thirst >= maxThirst) {
-			SoundHandler.CLOSEDOOR.play();
+			SoundHandler.CLOSEDOOR.randomPlay();
 			context.remove(this);
 		}
 	}
@@ -64,8 +64,13 @@ public class Guest {
 		if (thirst < 0) {
 			thirst = 0;
 		}
+		SoundHandler.OPENBEER.randomPlay();
 	}
 	
+	
+	public int count() {
+		return 1;
+	}
 	
 	public enum Drink {
 		BEER (100);

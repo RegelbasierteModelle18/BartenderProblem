@@ -75,6 +75,10 @@ public abstract class Bartender {
 		}
 	}
 	
+	public int count() {
+		return 1;
+	}
+	
 	// returns direction in radiant
 	protected abstract double calculateHeading(Context<Object> context);
 	

@@ -78,18 +78,21 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 					}
 					
 					// spawn guest
-					Guest guest = new Guest(0, 10, 100, 1);
+					Guest guest = new Guest(0, 100, 300, 1);
 					context.add(guest);
 					grid.moveTo(guest, tableLocation.getX(), tableLocation.getY());
+					space.moveTo(guest, tableLocation.getX() + 0.5, tableLocation.getY() + 0.5, 0);
 				}
 			}
 		});
 		
 		
 		context.add(TickHandler.getInstance());
-		context.add(new StupidBartender(1, 1));
-		context.add(new RolandBranntwein(1, 1, 1));
-		context.add(new BartholomeusVonPilsner(1, 1));
+		//context.add(new StupidBartender(1, 1));
+		//context.add(new RolandBranntwein(1, 1, 1));
+		for (int i = 0; i < 10; i++) {
+			context.add(new BartholomeusVonPilsner(2, 2));
+		}
 		
 		// create random environment for testing purposes
 		Type type;
@@ -101,7 +104,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 					//entry
 					type = Type.ENTRY;
 					
-				}else if(new Random().nextDouble() < 0.02  ) {
+				}else if(new Random().nextDouble() < 0.07  ) {
 					// desk
 					type = Type.TABLE;
 					
