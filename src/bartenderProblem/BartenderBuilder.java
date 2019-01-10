@@ -6,6 +6,7 @@ import java.util.Random;
 
 import bartenderProblem.actors.Guest;
 import bartenderProblem.actors.bartender.BartholomeusVonPilsner;
+import bartenderProblem.actors.bartender.EnolfVonPilsner;
 import bartenderProblem.actors.bartender.RolandBranntwein;
 import bartenderProblem.actors.bartender.StupidBartender;
 import bartenderProblem.environment.EnvironmentElement;
@@ -90,10 +91,12 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		
 		context.add(TickHandler.getInstance());
 		
-		//context.add(new StupidBartender(1, 1));
+		// add enolfs
+		EnolfVonPilsner.distribute(context, 0, xdim, 0, ydim, 3, 1, 2, 2);
 		
-		for (int i = 0; i < 64; i++) {
-			context.add(new RolandBranntwein(2, 2, 10));
+		//context.add(new StupidBa
+		for (int i = 0; i < 10; i++) {
+			//context.add(new RolandBranntwein(2, 2, 2));
 			//context.add(new BartholomeusVonPilsner(2, 2));
 		}
 		
