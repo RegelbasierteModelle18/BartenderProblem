@@ -92,11 +92,10 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		context.add(TickHandler.getInstance());
 		
 		// add enolfs
-		EnolfVonPilsner.distribute(context, 0, xdim, 0, ydim, 3, 1, 2, 2);
+		//EnolfVonPilsner.distribute(context, 0, xdim / 2, 0, ydim, 1, 1, 2, 2);
 		
-		//context.add(new StupidBa
-		for (int i = 0; i < 10; i++) {
-			//context.add(new RolandBranntwein(2, 2, 2));
+		for (int i = 0; i < 64; i++) {
+			context.add(new RolandBranntwein(2, 2, 20));
 			//context.add(new BartholomeusVonPilsner(2, 2));
 		}
 		

@@ -1,5 +1,5 @@
 /**
- * @file RolandBranntwein.java
+ * @file OswaldBranntwein.java
  * @date 2019-01-08
  * @author christomeyer
  */
@@ -25,7 +25,8 @@ import repast.simphony.space.grid.GridPoint;
 import repast.simphony.util.ContextUtils;
 
 
-public class RolandBranntwein extends Bartender{
+public class OswaldBranntwein extends Bartender{
+	private static HashMap<Guest, Bartender> guestManageSet = new HashMap<Guest, Bartender>(); 
 	int storageLimit;							// how many drinks the bartender can hold at a time
 	Context<Object> context;					// Simphony Context
 	private Map<Guest, Guest.Drink> orderList;	// orderList containing Guest with ordered Drink 
@@ -43,25 +44,18 @@ public class RolandBranntwein extends Bartender{
 	}
 	
 	/**
-	 * Roland Branntwein - ein Erbe des legendären Bartender
+	 * Oswald Branntwein - ein Erbe des legendären Bartender
 	 * 
-	 * Roland arbeitet mit leichter Intelligenz. Er hat eine begrenzte Trage- und Aufnahmemenge.
-	 * Zwischendurch muss er an der Theke also erstmal die Bestellungen abarbeiten, bevor er weitermachen kann.
-	 * Zu einem Gast geht er mit dem kürzesten Weg.
-	 * Der erste Gast, den er bedient, errechnet sich aus dem besten Distanz/Durst-Verhältnis.
-	 * Ab dem zweiten Gast bezieht er bei dieser berechnung nur Gäste in Reichweite von 20 in betracht.
-	 * Sind 70 Zeitschritte vergangen, in denen er Bestellungen aufgenommen hat oder ist die orderList voll, geht er zur Theke und bearbeitet die Bestellungen.
-	 * 
-	 * Manchmal idelt Roland einfach ein bisschen rum, obwohl er eigentlich besser zu tun hätte!
+	 * Hallo Beschreibung!
 	 */
 	
 	/**
 	 * c'tor
 	 * @param deliveryRange Range of throwing Drinks to Guests
 	 * @param orderRange Range of hearing the voice of a Guest
-	 * @param storageLimit how many Drink Roland can hold
+	 * @param storageLimit how many Drink Oswald can hold
 	 */
-	public RolandBranntwein(int deliveryRange, int orderRange, int storageLimit) {
+	public OswaldBranntwein(int deliveryRange, int orderRange, int storageLimit) {
 		super(deliveryRange, orderRange);
 		this.storageLimit = storageLimit;
 		orderList = new HashMap<Guest, Guest.Drink>();
@@ -71,7 +65,7 @@ public class RolandBranntwein extends Bartender{
 	}
 	
 	/**
-	 * Calculate the next walking direction of Roland
+	 * Calculate the next walking direction of Oswald
 	 */
 	protected double calculateHeading(Context<Object> context) {
 		ContinuousSpace<Object> space = Util.getSpace(context);
@@ -137,7 +131,7 @@ public class RolandBranntwein extends Bartender{
 				break;
 				
 			case REFILL:
-				// is Roland's storage full? => go to bar!
+				// is Oswald's storage full? => go to bar!
 				EnvironmentElement nextBar = Util.getNextEnvironmentElement(Type.BAR, avoidElements, context, (int) myPosition.getX(), (int) myPosition.getY());
 				if(nextBar == null) {
 					return 0;
@@ -167,7 +161,7 @@ public class RolandBranntwein extends Bartender{
 		}
 		// if we got here, all modes and priorities gone wrong (this shall NOT happen if any guests are available!)
 		if(goalPosition == null) {
-			System.out.println("Roland is in IDLE. DEBUG INFO: nextGuest="+nextGuest+", goalPosition="
+			System.out.println("Oswald is in IDLE. DEBUG INFO: nextGuest="+nextGuest+", goalPosition="
 								+goalPosition+", orderListSize="+orderList.size()+", storageSize="+storage.size()+", guestIdleTicksSize="+getGuestIdleTicks().size());
 			
 			
@@ -207,7 +201,7 @@ public class RolandBranntwein extends Bartender{
 	protected void handleDelivery(Guest guest) {
 		// this is critical...
 		if(storage.get(guest) == null) {
-			//System.out.println("Roland: handleDelivery: storage.get(guest) == null: is True");
+			//System.out.println("Oswald: handleDelivery: storage.get(guest) == null: is True");
 		}
 		// if storage is empty, it makes no sense to deliver anything
 		if(storage.isEmpty()) {
@@ -237,7 +231,7 @@ public class RolandBranntwein extends Bartender{
 		
 		// If orderList is full, i can't handle more drinks
 		if(orderList.size() >= storageLimit){
-			//System.out.println("Roland: My Order List is full, I'm hopefully on the way to the bar..");
+			//System.out.println("Oswald: My Order List is full, I'm hopefully on the way to the bar..");
 			return;
 		}
 		
@@ -252,7 +246,7 @@ public class RolandBranntwein extends Bartender{
 		}
 		
 		// Ask Guest for a Beer
-		//System.out.println("Roland: Do you want a beer?");
+		//System.out.println("Oswald: Do you want a beer?");
 		Guest.Drink drink = guest.order();
 		if(drink != null) {
 			System.out.println("Guest: Yes!");
@@ -295,7 +289,7 @@ public class RolandBranntwein extends Bartender{
 	
 	@Override
 	protected void fillUp() {
-		// If storage isn't empty, Roland got to bar accidently. Clear.
+		// If storage isn't empty, Oswald got to bar accidently. Clear.
 		if(!storage.isEmpty()) {
 			storage.clear();
 		}
@@ -309,7 +303,7 @@ public class RolandBranntwein extends Bartender{
 			if(getGuestIdleTicks().containsKey(order.getKey())) {
 				storage.put(order.getKey(), order.getValue());
 			} else {
-				//System.out.println("Roland: ...this guest is gone.");
+				//System.out.println("Oswald: ...this guest is gone.");
 			}
 			cnt++;
 		}
@@ -319,7 +313,7 @@ public class RolandBranntwein extends Bartender{
 		unthirstyGuests.clear();
 		
 		if(cnt == 0) {
-			//System.out.println("Roland: Bar should NOT be my Target! Why i am here?");
+			//System.out.println("Oswald: Bar should NOT be my Target! Why i am here?");
 		} else {
 		}
 		
