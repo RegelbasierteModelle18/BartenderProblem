@@ -1,6 +1,7 @@
 package bartenderProblem.actors.bartender;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import bartenderProblem.Util;
@@ -19,6 +20,13 @@ import repast.simphony.util.collections.IndexedIterable;
 public abstract class Bartender {
 	
 	int deliveryRange, orderRange;
+	/**
+	 * Explanation guestIdleTicks
+	 * Map, which contains every Guest available in the context with his Waiting/Existing-Time in Ticks
+	 * Usage: 1. Simple detection of which guests are gone (from your orderList, or whatever)
+	 * 		  2. Management for ALL BARTENDERS on guessing thirstiness of every guest
+	 * 			=> on delivery set Value of Guest to 0.
+	 */
 	private Map<Guest, Integer> guestIdleTicks;
 	
 	public Bartender(int deliveryRange, int orderRange) {
@@ -32,6 +40,7 @@ public abstract class Bartender {
 		Context<Object> context = ContextUtils.getContext(this);
 		Grid<Object> grid = (Grid<Object>) context.getProjection("Simple Grid");
 		ContinuousSpace<Object> space = (ContinuousSpace<Object>) context.getProjection("Continuous Space");
+		HashSet<Guest> goneGuests = new HashSet<Guest>();
 			
 		// update GuestIdleTicks Map
 		for(Object guest : context.getObjects(Guest.class)) {
@@ -42,24 +51,24 @@ public abstract class Bartender {
 			}
 		}
 		// delete gone-guests from guestIdleTicks-Map
-		try {
 		for(Map.Entry<Guest, Integer> guest : guestIdleTicks.entrySet()) {
 			if(Util.getSpace(context).getLocation(guest.getKey()) == null) {
-				guestIdleTicks.remove(guest.getKey());
-				continue;
+				goneGuests.add(guest.getKey());
 			}
 		}
-		} catch (java.util.ConcurrentModificationException e) {
+		for(Guest guest : goneGuests) {
+			guestIdleTicks.remove(guest);
 		}
+		
 		// handle deliverys
-		for (Object o : new ContinuousWithin(context, this, deliveryRange).query()) {
+		for (Object o : new ContinuousWithin(context, this, deliveryRange + 0.1).query()) {
 			if (o instanceof Guest) {
 				handleDelivery((Guest) o);
 			}
 		}
 		
 		// handle orders
-		for (Object o : new ContinuousWithin(context, this, orderRange).query()) {
+		for (Object o : new ContinuousWithin(context, this, orderRange + 0.1).query()) {
 			if (o instanceof Guest) {
 				handleOrder((Guest) o);
 			}
