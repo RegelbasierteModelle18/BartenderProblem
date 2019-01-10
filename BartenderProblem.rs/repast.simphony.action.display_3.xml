@@ -1,10 +1,14 @@
-<repast.simphony.visualization.engine.CartesianDisplayDescriptor simphonyVersion="2.5.0">
+<repast.simphony.visualization.engine.CartesianDisplayDescriptor simphonyVersion="2.6.0">
   <name>Display</name>
   <type>2D</type>
   <styles>
     <entry>
       <string>bartenderProblem.environment.EnvironmentElement</string>
       <string>bartenderProblem.environment.EnvironmentStyle2D</string>
+    </entry>
+    <entry>
+      <string>bartenderProblem.actors.bartender.EnolfVonPilsner</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
       <string>bartenderProblem.actors.Guest</string>
@@ -27,6 +31,10 @@
     <entry>
       <string>bartenderProblem.environment.EnvironmentElement</string>
       <null/>
+    </entry>
+    <entry>
+      <string>bartenderProblem.actors.bartender.EnolfVonPilsner</string>
+      <string>bartenderProblem.actors.bartender.EnolfVonPilsner.style_1.xml</string>
     </entry>
     <entry>
       <string>bartenderProblem.actors.Guest</string>
@@ -55,7 +63,7 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>488888912</hashCode>
+    <hashCode>1204479570</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
   <layoutProjection>Simple Grid</layoutProjection>
@@ -66,20 +74,24 @@
       <int>0</int>
     </entry>
     <entry>
+      <string>bartenderProblem.actors.bartender.EnolfVonPilsner</string>
+      <int>1</int>
+    </entry>
+    <entry>
       <string>bartenderProblem.actors.Guest</string>
-      <int>4</int>
+      <int>5</int>
     </entry>
     <entry>
       <string>bartenderProblem.actors.bartender.StupidBartender</string>
-      <int>3</int>
+      <int>4</int>
     </entry>
     <entry>
       <string>bartenderProblem.actors.bartender.RolandBranntwein</string>
-      <int>2</int>
+      <int>3</int>
     </entry>
     <entry>
       <string>bartenderProblem.actors.bartender.BartholomeusVonPilsner</string>
-      <int>1</int>
+      <int>2</int>
     </entry>
   </layerOrder>
   <projections>
