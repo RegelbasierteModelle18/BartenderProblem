@@ -33,13 +33,12 @@ import repast.simphony.util.collections.IndexedIterable;
 
 public class RolandBranntwein extends Bartender{
 	int storageLimit;		// how many drinks the bartender can hold at a time
-	double lastHeading = 0;
 	Context<Object> context;
 	private Map<Guest, Guest.Drink> orderList;
 	Map<Guest, Guest.Drink> storage;
 	private Guest nextGuest;
 	private HashSet<Guest> unthirstyGuests;
-	private int operationRange = 20;
+	private double operationRange = 20;
 	public Mode mode;
 	
 	public enum Mode {
@@ -64,7 +63,7 @@ public class RolandBranntwein extends Bartender{
 		NdPoint myPosition = space.getLocation(this);
 		Collection<Type> avoidElements = new ArrayList<>();
 		avoidElements.add(Type.TABLE);	// avoid tables
-		
+		updateOperationRange();
 		NdPoint goalPosition = null;
 		
 		// welcher ist der nächste Anlaufpunkt?
@@ -113,7 +112,10 @@ public class RolandBranntwein extends Bartender{
 			goalPosition = space.getLocation(nextGuest);
 		} 	
 		else if(mode == Mode.ORDER) {
-			
+			if(getSteps() > 50) {
+				mode = Mode.REFILL;
+				resetSteps();
+			}
 			// => Prio 2: der nächste Gast mit geringstens Distanz/Durst verhältnis, der noch nicht auf der orderList und noch nicht auf der unthirstyGuests steht
 			double maxOperationPrivation = 0;
 			for(Map.Entry<Guest, Integer> guest : getGuestIdleTicks().entrySet()) {
@@ -254,6 +256,13 @@ public class RolandBranntwein extends Bartender{
 		return Math.sqrt(Math.pow(myPos.getX() - guestPos.getX(), 2) + Math.pow(myPos.getY() - guestPos.getY(), 2));
 	}
 	
+	private void updateOperationRange() {
+		this.operationRange = getSteps() / 10;
+		if(operationRange <= 20){
+			operationRange = 20;
+		}
+	}
+	
 	// Value of efficiency to operate this guest
 	private double calcOperationPrivation(Guest guest) {
 		if(guest == null) {
@@ -290,9 +299,10 @@ public class RolandBranntwein extends Bartender{
 		if(cnt == 0) {
 			System.out.println("Roland: Bar should NOT be my Target! Why i am here?");
 		} else {
-			System.out.println("Roland: I'm now in DeliveryMode!");
+			System.out.println("Roland: Now delivering.");
 		}
 		
 		mode = Mode.DELIVERY;
+		resetSteps();
 	}
 }

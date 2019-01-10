@@ -24,10 +24,9 @@ public abstract class Bartender {
 	 * Explanation guestIdleTicks
 	 * Map, which contains every Guest available in the context with his Waiting/Existing-Time in Ticks
 	 * Usage: 1. Simple detection of which guests are gone (from your orderList, or whatever)
-	 * 		  2. Management for ALL BARTENDERS on guessing thirstiness of every guest
-	 * 			=> on delivery set Value of Guest to 0.
 	 */
 	private Map<Guest, Integer> guestIdleTicks;
+	private int stepCounter;
 	
 	public Bartender(int deliveryRange, int orderRange) {
 		this.deliveryRange = deliveryRange;
@@ -41,6 +40,7 @@ public abstract class Bartender {
 		Grid<Object> grid = (Grid<Object>) context.getProjection("Simple Grid");
 		ContinuousSpace<Object> space = (ContinuousSpace<Object>) context.getProjection("Continuous Space");
 		HashSet<Guest> goneGuests = new HashSet<Guest>();
+		stepCounter++;
 			
 		// update GuestIdleTicks Map
 		for(Object guest : context.getObjects(Guest.class)) {
@@ -109,14 +109,14 @@ public abstract class Bartender {
 		}
 	}
 	
-	public int getGuestIdleTicks(Guest guest) {
+	protected int getGuestIdleTicks(Guest guest) {
 		if(guestIdleTicks.containsKey(guest)) {
 			return guestIdleTicks.get(guest);
 		}
 		return 0;
 	}
 	
-	public Map<Guest, Integer> getGuestIdleTicks() {
+	protected Map<Guest, Integer> getGuestIdleTicks() {
 		return guestIdleTicks;
 	}
 	
@@ -135,4 +135,12 @@ public abstract class Bartender {
 	
 	// do this in every step the bartender is at the bar
 	protected abstract void fillUp();
+	
+	protected int getSteps() {
+		return stepCounter;
+	}
+	
+	protected void resetSteps() {
+		this.stepCounter = 0;
+	}
 }
