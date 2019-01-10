@@ -44,6 +44,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		thread.start();
 		
 		int xdim = 50, ydim = 50;
+		final double tableDensity = 0.05;		// percentage of table appearance
 		
 		// grid for environment
 		GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);
@@ -98,7 +99,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		
 		//context.add(new StupidBa
 		for (int i = 0; i < 1; i++) {
-			//context.add(new RolandBranntwein(1, 1, 10));
+			context.add(new RolandBranntwein(2, 2, 2));
 			//context.add(new BartholomeusVonPilsner(2, 2));
 		}
 		
@@ -113,7 +114,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 					//entry
 					type = Type.ENTRY;
 					
-				}else if(new Random().nextDouble() < 0.1 ) {
+				}else if(new Random().nextDouble() < tableDensity ) {
 					// desk
 					type = Type.TABLE;
 					tableCount++;
