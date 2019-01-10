@@ -173,4 +173,19 @@ public class EnolfVonPilsner extends Bartender {
 		DELIVER,
 		FILL_UP;
 	}
+	
+	// results in 4^partitions areas
+	public static void distribute(Context<Object> context, int minX, int maxX, int minY, int maxY, int partitions, int enolfPerArea, int enolfDeliveryRange, int enolfOrderRange) {
+		if(partitions == 0) {
+			for (int i = 0; i < enolfPerArea; i++) {
+				context.add(new EnolfVonPilsner(enolfDeliveryRange, enolfOrderRange, minX, maxX, minY, maxY));
+			}
+			return;
+		}
+		
+		distribute(context, minX, minX + (maxX - minX) / 2, minY, minY + (maxY - minY) / 2, partitions - 1, enolfPerArea, enolfDeliveryRange, enolfOrderRange);
+		distribute(context, minX + (maxX - minX) / 2, maxX, minY, minY + (maxY - minY) / 2, partitions - 1, enolfPerArea, enolfDeliveryRange, enolfOrderRange);
+		distribute(context, minX, minX + (maxX - minX) / 2, minY + (maxY - minY) / 2, maxY, partitions - 1, enolfPerArea, enolfDeliveryRange, enolfOrderRange);
+		distribute(context, minX + (maxX - minX) / 2, maxX, minY + (maxY - minY) / 2, maxY, partitions - 1, enolfPerArea, enolfDeliveryRange, enolfOrderRange);
+	}
 }

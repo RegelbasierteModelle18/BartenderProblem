@@ -44,7 +44,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		thread.start();
 		
 		int xdim = 50, ydim = 50;
-		final double tableDensity = 0.05;		// percentage of table appearance
+		final double tableDensity = 0.1;		// percentage of table appearance
 		
 		// grid for environment
 		GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);
@@ -91,15 +91,12 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		
 		context.add(TickHandler.getInstance());
 		
-
-		context.add(new EnolfVonPilsner(2, 2, 0, 25, 0, 25));
-		context.add(new EnolfVonPilsner(2, 2, 0, 25, 25, 50));
-		context.add(new EnolfVonPilsner(2, 2, 25, 50, 0, 25));
-		context.add(new EnolfVonPilsner(2, 2, 25, 50, 25, 50));
+		// add enolfs
+		EnolfVonPilsner.distribute(context, 0, xdim, 0, ydim, 3, 1, 2, 2);
 		
 		//context.add(new StupidBa
-		for (int i = 0; i < 1; i++) {
-			context.add(new RolandBranntwein(2, 2, 2));
+		for (int i = 0; i < 10; i++) {
+			//context.add(new RolandBranntwein(2, 2, 2));
 			//context.add(new BartholomeusVonPilsner(2, 2));
 		}
 		
