@@ -65,7 +65,7 @@ public class Guest {
 			thirst = 0;
 		}
 		SoundHandler.OPENBEER.randomPlay();
-		System.out.println("Guest: Yummy! Thank you! :)");
+		//System.out.println("Guest: Yummy! Thank you! :)");
 	}
 	
 	
