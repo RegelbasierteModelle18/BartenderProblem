@@ -1,4 +1,4 @@
-<repast.simphony.visualization.engine.CartesianDisplayDescriptor simphonyVersion="2.5.0">
+<repast.simphony.visualization.engine.CartesianDisplayDescriptor simphonyVersion="2.6.0">
   <name>Display</name>
   <type>2D</type>
   <styles>
@@ -12,6 +12,10 @@
     </entry>
     <entry>
       <string>bartenderProblem.actors.bartender.OswaldBranntwein</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+    </entry>
+    <entry>
+      <string>bartenderProblem.actors.bartender.HubertMetkrug</string>
       <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
@@ -45,6 +49,10 @@
       <string>bartenderProblem.actors.bartender.OswaldBranntwein.style_1.xml</string>
     </entry>
     <entry>
+      <string>bartenderProblem.actors.bartender.HubertMetkrug</string>
+      <string>bartenderProblem.actors.bartender.HubertMetkrug.style_5.xml</string>
+    </entry>
+    <entry>
       <string>bartenderProblem.actors.Guest</string>
       <string>bartenderProblem.actors.Guest.style_4.xml</string>
     </entry>
@@ -71,7 +79,7 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-1312179341</hashCode>
+    <hashCode>-1577363478</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
   <layoutProjection>Simple Grid</layoutProjection>
@@ -83,27 +91,31 @@
     </entry>
     <entry>
       <string>bartenderProblem.actors.bartender.EnolfVonPilsner</string>
-      <int>2</int>
+      <int>3</int>
     </entry>
     <entry>
       <string>bartenderProblem.actors.bartender.OswaldBranntwein</string>
+      <int>2</int>
+    </entry>
+    <entry>
+      <string>bartenderProblem.actors.bartender.HubertMetkrug</string>
       <int>1</int>
     </entry>
     <entry>
       <string>bartenderProblem.actors.Guest</string>
-      <int>6</int>
+      <int>7</int>
     </entry>
     <entry>
       <string>bartenderProblem.actors.bartender.StupidBartender</string>
-      <int>5</int>
+      <int>6</int>
     </entry>
     <entry>
       <string>bartenderProblem.actors.bartender.RolandBranntwein</string>
-      <int>4</int>
+      <int>5</int>
     </entry>
     <entry>
       <string>bartenderProblem.actors.bartender.BartholomeusVonPilsner</string>
-      <int>3</int>
+      <int>4</int>
     </entry>
   </layerOrder>
   <projections>

@@ -9,6 +9,7 @@ import bartenderProblem.actors.bartender.BartholomeusVonPilsner;
 import bartenderProblem.actors.bartender.EnolfVonPilsner;
 import bartenderProblem.actors.bartender.OswaldBranntwein;
 import bartenderProblem.actors.bartender.RolandBranntwein;
+import bartenderProblem.actors.bartender.HubertMetkrug;
 import bartenderProblem.actors.bartender.StupidBartender;
 import bartenderProblem.environment.EnvironmentElement;
 import bartenderProblem.environment.EnvironmentElement.Type;
@@ -96,8 +97,9 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		//EnolfVonPilsner.distribute(context, 0, xdim / 2, 0, ydim, 1, 1, 2, 2);
 		
 		for (int i = 0; i < 65; i++) {
-			context.add(new OswaldBranntwein(2, 2, 3));
+			//context.add(new OswaldBranntwein(2, 2, 3));
 			//context.add(new BartholomeusVonPilsner(2, 2));
+			context.add(new HubertMetkrug(2, 2, 3));
 		}
 		
 		// create random environment for testing purposes
