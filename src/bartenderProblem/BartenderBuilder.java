@@ -34,7 +34,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 			@Override
 			public void run() {
 				while(true) {
-					//SoundHandler.BACKGROUNDMUSIC.play();
+					SoundHandler.BACKGROUNDMUSIC.play();
 					try {
 						Thread.sleep(8 * 60 * 1000 + 8 * 1000); // restart song every 8 minutes and 8 seconds
 					} catch (InterruptedException e) {
