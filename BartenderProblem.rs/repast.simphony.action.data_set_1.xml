@@ -1,4 +1,4 @@
-<repast.simphony.data2.engine.DataSetDescriptor simphonyVersion="2.6.0">
+<repast.simphony.data2.engine.DataSetDescriptor simphonyVersion="2.5.0">
   <name>Counts</name>
   <type>AGGREGATE</type>
   <inclTick>true</inclTick>
@@ -30,6 +30,15 @@
         <id>guests</id>
         <className>bartenderProblem.actors.Guest</className>
         <methodName>count</methodName>
+        <aggType>SUM</aggType>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>ads</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>ads</id>
+        <className>bartenderProblem.Statistics</className>
+        <methodName>getTableCount</methodName>
         <aggType>SUM</aggType>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>

@@ -19,6 +19,9 @@ import repast.simphony.context.space.continuous.ContinuousSpaceFactoryFinder;
 import repast.simphony.context.space.grid.GridFactory;
 import repast.simphony.context.space.grid.GridFactoryFinder;
 import repast.simphony.dataLoader.ContextBuilder;
+import repast.simphony.engine.environment.RunEnvironment;
+import repast.simphony.parameter.Parameter;
+import repast.simphony.parameter.Parameters;
 import repast.simphony.query.space.continuous.ContinuousWithin;
 import repast.simphony.space.continuous.ContinuousSpace;
 import repast.simphony.space.continuous.NdPoint;
@@ -34,7 +37,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 			@Override
 			public void run() {
 				while(true) {
-					SoundHandler.BACKGROUNDMUSIC.play();
+					//SoundHandler.BACKGROUNDMUSIC.play();
 					try {
 						Thread.sleep(8 * 60 * 1000 + 8 * 1000); // restart song every 8 minutes and 8 seconds
 					} catch (InterruptedException e) {
@@ -45,8 +48,21 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		thread.setDaemon(true);
 		thread.start();
 		
-		int xdim = 50, ydim = 50;
-		final double tableDensity = 0.1;		// percentage of table appearance
+		/* Parameters from RunEnvironment */
+		Parameters p = RunEnvironment.getInstance().getParameters();
+		int numBartholomeus = (Integer)((Parameters) p).getValue("numBartholomeus");
+		int numEnolf = (Integer)((Parameters) p).getValue("numEnolf");
+		int numRoland = (Integer)((Parameters) p).getValue("numRoland");
+		int numOswald = (Integer)((Parameters) p).getValue("numOswald");
+		int numHubert = (Integer)((Parameters) p).getValue("numHubert");
+		int numGottfried = (Integer)((Parameters) p).getValue("numGottfried");
+		int tableDensity = (Integer)((Parameters) p).getValue("tableDensity");
+		int guestDensity = (Integer)((Parameters) p).getValue("guestDensity");
+		int xdim = (Integer)((Parameters) p).getValue("xdim");
+		int ydim = (Integer)((Parameters) p).getValue("ydim");
+		
+		
+		//int xdim = 50, ydim = 50;
 		
 		// grid for environment
 		GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);
@@ -64,7 +80,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 			@Override
 			public void onTick(Context<Object> context, Grid<Object> grid, ContinuousSpace<Object> space) {
 				// guest enters with the probability of 10%
-				if (new Random().nextInt(100) < 10) {
+				if (new Random().nextInt(100) < guestDensity) {
 					
 					// search table
 					EnvironmentElement table = Util.getRandomEnvironmentElement(Type.TABLE, context);
@@ -93,14 +109,22 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		
 		context.add(TickHandler.getInstance());
 		
-		// add enolfs
-		//EnolfVonPilsner.distribute(context, 0, xdim / 2, 0, ydim, 1, 1, 2, 2);
+		/* ADD BARTENDERS */
+		for (int i = 0; i < numBartholomeus; i++)
+			context.add(new BartholomeusVonPilsner(2, 2));
+		for (int i = 0; i < numEnolf; i++)
+			EnolfVonPilsner.distribute(context, 0, xdim, 0, ydim, 1, 1, 2, 2);
 		
-		for (int i = 0; i < 65; i++) {
-			//context.add(new OswaldBranntwein(2, 2, 3));
-			//context.add(new BartholomeusVonPilsner(2, 2));
+		for (int i = 0; i < numRoland; i++)
+			context.add(new RolandBranntwein(2, 2, 3));
+		for (int i = 0; i < numOswald; i++)
+			context.add(new OswaldBranntwein(2, 2, 3));
+		
+		for (int i = 0; i < numHubert; i++)
 			context.add(new HubertMetkrug(2, 2, 3));
-		}
+		for (int i = 0; i < numGottfried; i++) {}
+			//context.add(new GottfriedMetkrug(2, 2, 3));
+		
 		
 		// create random environment for testing purposes
 		int tableCount = 0;
@@ -113,7 +137,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 					//entry
 					type = Type.ENTRY;
 					
-				}else if(new Random().nextDouble() < tableDensity ) {
+				}else if(new Random().nextInt(100) < tableDensity ) {
 					// desk
 					type = Type.TABLE;
 					tableCount++;

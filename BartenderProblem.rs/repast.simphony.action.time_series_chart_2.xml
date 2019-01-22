@@ -1,4 +1,4 @@
-<repast.simphony.chart2.engine.TimeSeriesChartDescriptor simphonyVersion="2.6.0">
+<repast.simphony.chart2.engine.TimeSeriesChartDescriptor simphonyVersion="2.5.0">
   <name>CountsChart</name>
   <dataSet>Counts</dataSet>
   <xAxisLabel>Tick Count</xAxisLabel>
@@ -20,6 +20,18 @@
   <showGrid>true</showGrid>
   <showLegend>true</showLegend>
   <seriesIds>
+    <entry>
+      <string>ads</string>
+      <SeriesData>
+        <label>maxCapacity</label>
+        <color>
+          <red>0</red>
+          <green>0</green>
+          <blue>0</blue>
+          <alpha>255</alpha>
+        </color>
+      </SeriesData>
+    </entry>
     <entry>
       <string>bartenders</string>
       <SeriesData>
