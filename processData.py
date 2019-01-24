@@ -6,7 +6,7 @@ if len(sys.argv) != 3:
     print("please enter the input csv file name and the output csv file!")
     exit()
 
-rows = [["bartenders", "tables", "avg_guests", "stddev_guests"]]
+rows = [["bartenders", "tables", "average guests", "standard deviation guests"]]
 
 
 with open(sys.argv[1], 'r') as csvfile:
@@ -37,7 +37,7 @@ with open(sys.argv[1], 'r') as csvfile:
                 currEntryCount = 0
                 currGuestCounts = []
 
-            if float(row[3]) > 2000:
+            if float(row[3]) > 5000:
                 currGuestCounts.append(int(float(row[2])))
                 currGuests += int(float(row[2]))
                 currEntryCount += 1

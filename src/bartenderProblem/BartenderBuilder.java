@@ -36,7 +36,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 	private static int finishedTasks = 0;
 	private static int threadName = new Random().nextInt(1000);
 	
-	public static double TICKS = 8000;
+	public static double TICKS = 12000;
 	
 	public Context<Object> build(Context<Object> context) {
 		
