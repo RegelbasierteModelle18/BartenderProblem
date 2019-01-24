@@ -33,7 +33,16 @@ import repast.simphony.space.grid.GridPoint;
 import repast.simphony.space.grid.RandomGridAdder;
 
 public class BartenderBuilder implements ContextBuilder<Object> {
+	private static int finishedTasks = 0;
+	private static int threadName = new Random().nextInt(1000);
+	
+	public static double TICKS = 8000;
+	
 	public Context<Object> build(Context<Object> context) {
+		
+		if(TICKS > 0) {
+			RunEnvironment.getInstance().endAt(TICKS);
+		}
 		
 		SoundHandler.mute();
 		Log.mute();
@@ -80,10 +89,17 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		ContinuousSpace<Object> space = spaceFactory.createContinuousSpace("Continuous Space", context, new RandomCartesianAdder<Object>(),
 				new repast.simphony.space.continuous.BouncyBorders(), xdim, ydim, 1);
 		
+
+		TickHandler myTickHandler = new TickHandler();
+		
 		// add task that get called every tick to enable guests to enter the bar
-		TickHandler.getInstance().addListener(new TickHandler.TickListener() {
+		myTickHandler.addListener(new TickHandler.TickListener() {
 			@Override
-			public void onTick(Context<Object> context, Grid<Object> grid, ContinuousSpace<Object> space) {
+			public void onTick(Context<Object> context, Grid<Object> grid, ContinuousSpace<Object> space, long ticks) {
+				if (TICKS > 0 && ticks % TICKS == 0) {
+					System.out.println("Thread " + threadName + ": " + (++finishedTasks) + " runs finished");
+				}
+				
 				// guest enters with the probability of 10%
 				if (new Random().nextInt(100) < guestDensity) {
 					
@@ -111,8 +127,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 			}
 		});
 		
-		
-		context.add(TickHandler.getInstance());
+		context.add(myTickHandler);
 		
 		/* ADD BARTENDERS */
 		for (int i = 0; i < numBartholomeus; i++)

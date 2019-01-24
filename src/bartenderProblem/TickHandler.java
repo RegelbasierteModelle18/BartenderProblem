@@ -10,11 +10,12 @@ import repast.simphony.space.grid.Grid;
 import repast.simphony.util.ContextUtils;
 
 public class TickHandler {
-	private static TickHandler instance;
+	private long ticks;
 	
 	private List<TickListener> listeners;
 	
-	private TickHandler() {
+	public TickHandler() {
+		ticks = 0;
 		listeners = new ArrayList<>();
 	}
 	
@@ -24,22 +25,17 @@ public class TickHandler {
 		Grid<Object> grid = (Grid<Object>) context.getProjection("Simple Grid");
 		ContinuousSpace<Object> space = (ContinuousSpace<Object>) context.getProjection("Continuous Space");
 		
+		ticks++;
+		
 		for (TickListener listener : listeners) {
 			if (listener != null) {
-				listener.onTick(context, grid, space);
+				listener.onTick(context, grid, space, ticks);
 			}
 		}
 	}
 	
 	public void addListener(TickListener listener) {
 		listeners.add(listener);
-	}
-	
-	public static TickHandler getInstance() {
-		if (instance == null) {
-			instance = new TickHandler();
-		}
-		return instance;
 	}
 	
 	public interface TickListener {
@@ -49,7 +45,8 @@ public class TickHandler {
 		 * @param context context
 		 * @param grid grid
 		 * @param space space
+		 * @param ticks current ticks
 		 */
-		void onTick(Context<Object> context, Grid<Object> grid, ContinuousSpace<Object> space);
+		void onTick(Context<Object> context, Grid<Object> grid, ContinuousSpace<Object> space, long ticks);
 	}
 }
