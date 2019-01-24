@@ -14,6 +14,21 @@ public enum SoundHandler {
 	BACKGROUNDMUSIC("audio/bgmusic.wav");
 	
 	
+	private static boolean muted;
+	
+	static {
+		unmute();
+	}
+	
+	public static void mute() {
+		muted = true;
+	}
+	
+	public static void unmute() {
+		muted = false;
+	}
+	
+	
 	private String file;
 	
 	private SoundHandler(String file) {
@@ -27,14 +42,16 @@ public enum SoundHandler {
 	}
 	
 	public void play() {
-		try {
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File(file));
-			Clip clip = AudioSystem.getClip();
-			clip.open(audioIn);
-	        clip.start();
-		} catch (UnsupportedAudioFileException e) {
-		} catch (IOException e) {
-		} catch (LineUnavailableException e) {
+		if (!muted) {
+			try {
+				AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File(file));
+				Clip clip = AudioSystem.getClip();
+				clip.open(audioIn);
+		        clip.start();
+			} catch (UnsupportedAudioFileException e) {
+			} catch (IOException e) {
+			} catch (LineUnavailableException e) {
+			}
 		}
 	}
 }

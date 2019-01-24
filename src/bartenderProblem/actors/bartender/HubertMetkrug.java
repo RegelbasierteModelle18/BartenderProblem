@@ -1,5 +1,6 @@
 package bartenderProblem.actors.bartender;
 
+import bartenderProblem.Log;
 import bartenderProblem.SoundHandler;
 import bartenderProblem.Util;
 import bartenderProblem.actors.Guest;
@@ -42,14 +43,14 @@ public class HubertMetkrug extends Bartender{
 		update_delivery(space);
 		// Delivery
 		if(!to_deliver.isEmpty()) {
-			System.out.println("Heading to deliver order");
+			Log.println("Heading to deliver order");
 			Guest target_guest = (Guest)to_deliver.keySet().toArray()[0];
 			goal = space.getLocation(target_guest);
 		}
 		// Fill up
 		else if(state == State.BAR || (state != State.ORDER &&
 				((double)(order_status.size()) / context.getObjects(Guest.class).size() > new Random().nextDouble()))) {
-			System.out.println("Heading to Bar");
+			Log.println("Heading to Bar");
 			state = State.BAR;
 			EnvironmentElement nextBar = Util.getNextEnvironmentElement(Type.BAR, avoidElements, context, (int) pos.getX(), (int) pos.getY());
 			if(nextBar == null) {
@@ -60,7 +61,7 @@ public class HubertMetkrug extends Bartender{
 		}
 		// Order
 		else if(state != State.BAR){
-			System.out.println("Heading to take order");
+			Log.println("Heading to take order");
 			state = State.ORDER;
 			HashSet<Guest> s = new HashSet<>();
 			for(Object g : context.getObjects(Guest.class))
@@ -76,7 +77,7 @@ public class HubertMetkrug extends Bartender{
 			}
 		}
 		if(goal == null) {
-			System.out.println("Heading nowhere");
+			Log.println("Heading nowhere");
 			state = State.IDLE;
 			return Math.PI * 2 * new Random().nextDouble();
 		}

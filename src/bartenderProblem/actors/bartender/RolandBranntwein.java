@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import bartenderProblem.Log;
 import bartenderProblem.Util;
 import bartenderProblem.actors.Guest;
 import bartenderProblem.environment.EnvironmentElement;
@@ -43,16 +44,16 @@ public class RolandBranntwein extends Bartender{
 	}
 	
 	/**
-	 * Roland Branntwein - ein Erbe des legendären Bartender
+	 * Roland Branntwein - ein Erbe des legendï¿½ren Bartender
 	 * 
 	 * Roland arbeitet mit leichter Intelligenz. Er hat eine begrenzte Trage- und Aufnahmemenge.
 	 * Zwischendurch muss er an der Theke also erstmal die Bestellungen abarbeiten, bevor er weitermachen kann.
-	 * Zu einem Gast geht er mit dem kürzesten Weg.
-	 * Der erste Gast, den er bedient, errechnet sich aus dem besten Distanz/Durst-Verhältnis.
-	 * Ab dem zweiten Gast bezieht er bei dieser berechnung nur Gäste in Reichweite von 20 in betracht.
+	 * Zu einem Gast geht er mit dem kï¿½rzesten Weg.
+	 * Der erste Gast, den er bedient, errechnet sich aus dem besten Distanz/Durst-Verhï¿½ltnis.
+	 * Ab dem zweiten Gast bezieht er bei dieser berechnung nur Gï¿½ste in Reichweite von 20 in betracht.
 	 * Sind 70 Zeitschritte vergangen, in denen er Bestellungen aufgenommen hat oder ist die orderList voll, geht er zur Theke und bearbeitet die Bestellungen.
 	 * 
-	 * Manchmal idelt Roland einfach ein bisschen rum, obwohl er eigentlich besser zu tun hätte!
+	 * Manchmal idelt Roland einfach ein bisschen rum, obwohl er eigentlich besser zu tun hï¿½tte!
 	 */
 	
 	/**
@@ -167,7 +168,7 @@ public class RolandBranntwein extends Bartender{
 		}
 		// if we got here, all modes and priorities gone wrong (this shall NOT happen if any guests are available!)
 		if(goalPosition == null) {
-			System.out.println("Roland is in IDLE. DEBUG INFO: nextGuest="+nextGuest+", goalPosition="
+			Log.println("Roland is in IDLE. DEBUG INFO: nextGuest="+nextGuest+", goalPosition="
 								+goalPosition+", orderListSize="+orderList.size()+", storageSize="+storage.size()+", guestIdleTicksSize="+getGuestIdleTicks().size());
 			
 			
@@ -207,7 +208,7 @@ public class RolandBranntwein extends Bartender{
 	protected void handleDelivery(Guest guest) {
 		// this is critical...
 		if(storage.get(guest) == null) {
-			//System.out.println("Roland: handleDelivery: storage.get(guest) == null: is True");
+			//Log.println("Roland: handleDelivery: storage.get(guest) == null: is True");
 		}
 		// if storage is empty, it makes no sense to deliver anything
 		if(storage.isEmpty()) {
@@ -237,7 +238,7 @@ public class RolandBranntwein extends Bartender{
 		
 		// If orderList is full, i can't handle more drinks
 		if(orderList.size() >= storageLimit){
-			//System.out.println("Roland: My Order List is full, I'm hopefully on the way to the bar..");
+			//Log.println("Roland: My Order List is full, I'm hopefully on the way to the bar..");
 			return;
 		}
 		
@@ -252,13 +253,13 @@ public class RolandBranntwein extends Bartender{
 		}
 		
 		// Ask Guest for a Beer
-		//System.out.println("Roland: Do you want a beer?");
+		//Log.println("Roland: Do you want a beer?");
 		Guest.Drink drink = guest.order();
 		if(drink != null) {
-			System.out.println("Guest: Yes!");
+			Log.println("Guest: Yes!");
 			orderList.put(guest, drink);
 		} else {
-			System.out.println("Guest: I don't want a Drink!");
+			Log.println("Guest: I don't want a Drink!");
 			unthirstyGuests.add(guest);
 		}
 		
@@ -309,7 +310,7 @@ public class RolandBranntwein extends Bartender{
 			if(getGuestIdleTicks().containsKey(order.getKey())) {
 				storage.put(order.getKey(), order.getValue());
 			} else {
-				//System.out.println("Roland: ...this guest is gone.");
+				//Log.println("Roland: ...this guest is gone.");
 			}
 			cnt++;
 		}
@@ -319,7 +320,7 @@ public class RolandBranntwein extends Bartender{
 		unthirstyGuests.clear();
 		
 		if(cnt == 0) {
-			//System.out.println("Roland: Bar should NOT be my Target! Why i am here?");
+			//Log.println("Roland: Bar should NOT be my Target! Why i am here?");
 		} else {
 		}
 		

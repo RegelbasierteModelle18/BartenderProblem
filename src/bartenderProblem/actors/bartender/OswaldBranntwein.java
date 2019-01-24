@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import bartenderProblem.Log;
 import bartenderProblem.Util;
 import bartenderProblem.actors.Guest;
 import bartenderProblem.environment.EnvironmentElement;
@@ -46,7 +47,7 @@ public class OswaldBranntwein extends Bartender{
 	}
 	
 	/**
-	 * Oswald Branntwein - ein Erbe des legendären Bartender. Bruder des ominösen Roland Branntwein.
+	 * Oswald Branntwein - ein Erbe des legendï¿½ren Bartender. Bruder des ominï¿½sen Roland Branntwein.
 	 * Eigentlich ist er Koch, kann aber besser Barkeepern als Roland.
 	 * 
 	 * Hallo Beschreibung!
@@ -78,7 +79,7 @@ public class OswaldBranntwein extends Bartender{
 		avoidElements.add(Type.TABLE);	// avoid tables
 		updateOperationRange();
 		/*if(lastMode != mode) {
-			System.out.println("Current Mode: "+mode);
+			Log.println("Current Mode: "+mode);
 			lastMode = mode;
 		}*/
 		NdPoint goalPosition = null;
@@ -112,7 +113,7 @@ public class OswaldBranntwein extends Bartender{
 			case ORDER:
 				// don't stay in order mode too long
 				if(((getSteps() > 50) && !orderList.isEmpty()) || (orderList.size() >= storageLimit)) {
-					//System.out.println("Oswald is going to the Bar.");
+					//Log.println("Oswald is going to the Bar.");
 					mode = Mode.REFILL;
 					resetSteps();
 				} else {
@@ -135,7 +136,7 @@ public class OswaldBranntwein extends Bartender{
 						mode = Mode.REFILL;
 					}
 					goalPosition = space.getLocation(nextGuest);
-					//System.out.println("ORDER: Position is:"+goalPosition);
+					//Log.println("ORDER: Position is:"+goalPosition);
 				}
 				break;
 				
@@ -187,7 +188,7 @@ public class OswaldBranntwein extends Bartender{
 				}
 			}
 			if(goalPosition == null) {
-				System.out.println("Oswald is in IDLE. DEBUG INFO: nextGuest="+nextGuest+", goalPosition="
+				Log.println("Oswald is in IDLE. DEBUG INFO: nextGuest="+nextGuest+", goalPosition="
 						+goalPosition+", orderListSize="+orderList.size()+", storageSize="+storage.size()
 						+", guestIdleTicksSize="+getGuestIdleTicks().size()+", Mode="+mode);
 				mode = Mode.IDLE;
@@ -248,7 +249,7 @@ public class OswaldBranntwein extends Bartender{
 			resetSteps();
 			mode = Mode.ORDER;
 		}
-		//System.out.println("Oswald: My Storage: "+storage.size()+"/"+storageLimit+"!");
+		//Log.println("Oswald: My Storage: "+storage.size()+"/"+storageLimit+"!");
 		guestManageSet.remove(guest);
 		
 		// update thirstiness in global guestIdleTicks
@@ -270,7 +271,7 @@ public class OswaldBranntwein extends Bartender{
 		// If orderList is full, i can't handle more drinks
 		if(orderList.size() >= storageLimit){
 			mode = Mode.REFILL;
-			//System.out.println("Oswald: (in handleOrder) Now going into REFILL!");
+			//Log.println("Oswald: (in handleOrder) Now going into REFILL!");
 			return;
 		}
 		
@@ -285,17 +286,17 @@ public class OswaldBranntwein extends Bartender{
 		}
 		
 		// Ask Guest for a Beer
-		//System.out.println("Oswald: Do you want a beer?");
+		//Log.println("Oswald: Do you want a beer?");
 		Guest.Drink drink = guest.order();
 		if(drink != null) {
 			orderList.put(guest, drink);
 			if(orderList.size() >= storageLimit) {
 				mode = Mode.REFILL;
 			}
-			//System.out.println("Oswald: Ok, orderList: "+orderList.size()+"/"+storageLimit+"!");
+			//Log.println("Oswald: Ok, orderList: "+orderList.size()+"/"+storageLimit+"!");
 			guestManageSet.add(guest);
 		} else {
-			//System.out.println("Guest: I don't want a Drink!");
+			//Log.println("Guest: I don't want a Drink!");
 			unthirstyGuests.add(guest);
 		}
 		
@@ -343,7 +344,7 @@ public class OswaldBranntwein extends Bartender{
 			if(getGuestIdleTicks().containsKey(order.getKey())) {
 				storage.put(order.getKey(), order.getValue());
 			} else {
-				//System.out.println("Oswald: ...this guest is gone.");
+				//Log.println("Oswald: ...this guest is gone.");
 			}
 			cnt++;
 		}
@@ -353,9 +354,9 @@ public class OswaldBranntwein extends Bartender{
 		unthirstyGuests.clear();
 		
 		if(cnt == 0) {
-			//System.out.println("Oswald: Bar should NOT be my Target! Why i am here?");
+			//Log.println("Oswald: Bar should NOT be my Target! Why i am here?");
 		} else {
-			//System.out.println("Oswald: Going into DELIVERY MODE");
+			//Log.println("Oswald: Going into DELIVERY MODE");
 		}
 		
 		mode = Mode.DELIVERY;

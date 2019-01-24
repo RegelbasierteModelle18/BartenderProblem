@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import bartenderProblem.Log;
 import bartenderProblem.SoundHandler;
 import bartenderProblem.Util;
 import bartenderProblem.actors.Guest;
@@ -134,7 +135,7 @@ public class EnolfVonPilsner extends Bartender {
 				this.guest = null;
 				drink = null;
 				
-				System.out.println("deliver");
+				Log.println("deliver");
 			}
 		}
 	}
@@ -148,11 +149,11 @@ public class EnolfVonPilsner extends Bartender {
 					this.guest = null;
 					state = State.TAKE_ORDER;
 					
-					System.out.println("no drink for him");
+					Log.println("no drink for him");
 				} else {
 					state = State.FILL_UP;
 	
-					System.out.println("take order");
+					Log.println("take order");
 				}
 			}
 		}
@@ -164,7 +165,7 @@ public class EnolfVonPilsner extends Bartender {
 			state = State.DELIVER;
 			
 			SoundHandler.FILL_UP.randomPlay();
-			System.out.println("fill up");
+			Log.println("fill up");
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package bartenderProblem.actors.bartender;
 
+import bartenderProblem.Log;
 import bartenderProblem.SoundHandler;
 import bartenderProblem.Util;
 import bartenderProblem.actors.Guest;
@@ -65,13 +66,13 @@ public class GottfriedMetkrug extends Bartender{
 			update_delivery(space);
 		// Delivery
 		if(is_deliverer && !to_deliver.isEmpty()) {
-			System.out.println("Heading to deliver order");
+			Log.println("Heading to deliver order");
 			Guest target_guest = (Guest)to_deliver.keySet().toArray()[0];
 			goal = space.getLocation(target_guest);
 		}
 		// Fill up
 		else if(is_deliverer) {
-			System.out.println("Heading to Bar");
+			Log.println("Heading to Bar");
 			EnvironmentElement nextBar = Util.getNextEnvironmentElement(Type.BAR, avoidElements, context, (int) pos.getX(), (int) pos.getY());
 			if(nextBar == null) {
 				return 0;
@@ -81,7 +82,7 @@ public class GottfriedMetkrug extends Bartender{
 		}
 		// Order
 		else if(!is_deliverer){
-			System.out.println("Heading to take order");
+			Log.println("Heading to take order");
 			HashSet<Guest> s = new HashSet<>();
 			for(Object g : context.getObjects(Guest.class))
 				s.add((Guest)g);
@@ -96,7 +97,7 @@ public class GottfriedMetkrug extends Bartender{
 			}
 		}
 		if(goal == null) {
-			System.out.println("Heading nowhere");
+			Log.println("Heading nowhere");
 			return Math.PI * 2 * new Random().nextDouble();
 		}
 		List<GridPoint> shortestWay = Util.calculatePath((int) pos.getX(), (int) pos.getY(), (int) goal.getX(), (int) goal.getY(), avoidElements, context);

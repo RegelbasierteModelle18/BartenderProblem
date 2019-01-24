@@ -34,11 +34,15 @@ import repast.simphony.space.grid.RandomGridAdder;
 
 public class BartenderBuilder implements ContextBuilder<Object> {
 	public Context<Object> build(Context<Object> context) {
+		
+		SoundHandler.mute();
+		Log.mute();
+		
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				while(true) {
-					//SoundHandler.BACKGROUNDMUSIC.play();
+					SoundHandler.BACKGROUNDMUSIC.play();
 					try {
 						Thread.sleep(8 * 60 * 1000 + 8 * 1000); // restart song every 8 minutes and 8 seconds
 					} catch (InterruptedException e) {
