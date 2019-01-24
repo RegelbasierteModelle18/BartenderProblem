@@ -30,6 +30,12 @@
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>
+				<parameter name="ydim" displayName="Bar Height" type="int" 
+						defaultValue="50" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
+									
+		/>
 				<parameter name="xdim" displayName="Bar Width" type="int" 
 						defaultValue="50" 
 						isReadOnly="false" 
