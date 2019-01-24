@@ -176,17 +176,32 @@ public class EnolfVonPilsner extends Bartender {
 	}
 	
 	// results in 4^partitions areas
-	public static void distribute(Context<Object> context, int minX, int maxX, int minY, int maxY, int partitions, int enolfPerArea, int enolfDeliveryRange, int enolfOrderRange) {
-		if(partitions == 0) {
-			for (int i = 0; i < enolfPerArea; i++) {
-				context.add(new EnolfVonPilsner(enolfDeliveryRange, enolfOrderRange, minX, maxX, minY, maxY));
+	public static void distribute(Context<Object> context, int minX, int maxX, int minY, int maxY, int enolfCount, int enolfDeliveryRange, int enolfOrderRange) {
+		if(enolfCount / 4 > 0) {
+			int remainder = enolfCount % 4;
+			distribute(context, minX, minX + (maxX - minX) / 2, minY, minY + (maxY - minY) / 2, enolfCount / 4 + (remainder-- > 0 ? 1 : 0), enolfDeliveryRange, enolfOrderRange);
+			distribute(context, minX + (maxX - minX) / 2, maxX, minY, minY + (maxY - minY) / 2, enolfCount / 4 + (remainder-- > 0 ? 1 : 0), enolfDeliveryRange, enolfOrderRange);
+			distribute(context, minX, minX + (maxX - minX) / 2, minY + (maxY - minY) / 2, maxY, enolfCount / 4 + (remainder-- > 0 ? 1 : 0), enolfDeliveryRange, enolfOrderRange);
+			distribute(context, minX + (maxX - minX) / 2, maxX, minY + (maxY - minY) / 2, maxY, enolfCount / 4, enolfDeliveryRange, enolfOrderRange);
+		} else {
+			switch (enolfCount) {
+				case 1:
+					context.add(new EnolfVonPilsner(enolfDeliveryRange, enolfOrderRange, minX, maxX, minY, maxY));
+					break;
+				case 2:
+					context.add(new EnolfVonPilsner(enolfDeliveryRange, enolfOrderRange, minX, minX + (maxX - minX) / 2, minY, maxY));
+					context.add(new EnolfVonPilsner(enolfDeliveryRange, enolfOrderRange, minX + (maxX - minX) / 2, maxX, minY, maxY));
+					break;
+				case 3:
+					context.add(new EnolfVonPilsner(enolfDeliveryRange, enolfOrderRange, minX, minX + (maxX - minX) / 2, minY, minY + (maxY - minY) / 2));
+					context.add(new EnolfVonPilsner(enolfDeliveryRange, enolfOrderRange, minX + (maxX - minX) / 2, maxX, minY, minY + (maxY - minY) / 2));
+					context.add(new EnolfVonPilsner(enolfDeliveryRange, enolfOrderRange, minX, maxX, minY + (maxY - minY) / 2, maxY));
+					break;
 			}
-			return;
 		}
 		
-		distribute(context, minX, minX + (maxX - minX) / 2, minY, minY + (maxY - minY) / 2, partitions - 1, enolfPerArea, enolfDeliveryRange, enolfOrderRange);
-		distribute(context, minX + (maxX - minX) / 2, maxX, minY, minY + (maxY - minY) / 2, partitions - 1, enolfPerArea, enolfDeliveryRange, enolfOrderRange);
-		distribute(context, minX, minX + (maxX - minX) / 2, minY + (maxY - minY) / 2, maxY, partitions - 1, enolfPerArea, enolfDeliveryRange, enolfOrderRange);
-		distribute(context, minX + (maxX - minX) / 2, maxX, minY + (maxY - minY) / 2, maxY, partitions - 1, enolfPerArea, enolfDeliveryRange, enolfOrderRange);
+		
+		
+		
 	}
 }

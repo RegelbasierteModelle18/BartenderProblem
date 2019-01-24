@@ -24,6 +24,7 @@ import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.parameter.Parameter;
 import repast.simphony.parameter.Parameters;
 import repast.simphony.query.space.continuous.ContinuousWithin;
+import repast.simphony.random.RandomHelper;
 import repast.simphony.space.continuous.ContinuousSpace;
 import repast.simphony.space.continuous.NdPoint;
 import repast.simphony.space.continuous.RandomCartesianAdder;
@@ -101,7 +102,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 				}
 				
 				// guest enters with the probability of 10%
-				if (new Random().nextInt(100) < guestDensity) {
+				if (RandomHelper.nextIntFromTo(0, 100) < guestDensity) {
 					
 					// search table
 					EnvironmentElement table = Util.getRandomEnvironmentElement(Type.TABLE, context);
@@ -132,8 +133,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		/* ADD BARTENDERS */
 		for (int i = 0; i < numBartholomeus; i++)
 			context.add(new BartholomeusVonPilsner(2, 2));
-		for (int i = 0; i < numEnolf; i++)
-			EnolfVonPilsner.distribute(context, 0, xdim, 0, ydim, 1, 1, 2, 2);
+		EnolfVonPilsner.distribute(context, 0, xdim, 0, ydim, numEnolf, 2, 2);
 		
 		for (int i = 0; i < numRoland; i++)
 			context.add(new RolandBranntwein(2, 2, 3));
@@ -157,7 +157,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 					//entry
 					type = Type.ENTRY;
 					
-				}else if(new Random().nextInt(100) < tableDensity ) {
+				}else if(RandomHelper.nextIntFromTo(0, 100) < tableDensity ) {
 					// desk
 					type = Type.TABLE;
 					tableCount++;
