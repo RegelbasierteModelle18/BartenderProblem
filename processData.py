@@ -37,7 +37,7 @@ with open(sys.argv[1], 'r') as csvfile:
                 currEntryCount = 0
                 currGuestCounts = []
 
-            if float(row[3]) > 5000:
+            if float(row[3]) > 8000:
                 currGuestCounts.append(int(float(row[2])))
                 currGuests += int(float(row[2]))
                 currEntryCount += 1
