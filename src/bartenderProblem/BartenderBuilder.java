@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import bartenderProblem.actors.Guest;
+import bartenderProblem.actors.bartender.AlbusVonPilsner;
 import bartenderProblem.actors.bartender.BartholomeusVonPilsner;
 import bartenderProblem.actors.bartender.EnolfVonPilsner;
 import bartenderProblem.actors.bartender.OswaldBranntwein;
@@ -67,6 +68,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		Parameters p = RunEnvironment.getInstance().getParameters();
 		int numBartholomeus = (Integer)((Parameters) p).getValue("numBartholomeus");
 		int numEnolf = (Integer)((Parameters) p).getValue("numEnolf");
+		int numAlbus = (Integer)((Parameters) p).getValue("numAlbus");
 		int numRoland = (Integer)((Parameters) p).getValue("numRoland");
 		int numOswald = (Integer)((Parameters) p).getValue("numOswald");
 		int numHubert = (Integer)((Parameters) p).getValue("numHubert");
@@ -134,6 +136,7 @@ public class BartenderBuilder implements ContextBuilder<Object> {
 		for (int i = 0; i < numBartholomeus; i++)
 			context.add(new BartholomeusVonPilsner(2, 2));
 		EnolfVonPilsner.distribute(context, 0, xdim, 0, ydim, numEnolf, 2, 2);
+		AlbusVonPilsner.distribute(context, 0, xdim, 0, ydim, numAlbus, 2, 2);
 		
 		for (int i = 0; i < numRoland; i++)
 			context.add(new RolandBranntwein(2, 2, 3));
