@@ -16,37 +16,29 @@ Die Entitäten des Systems werden durch einen Gast und sieben verschiedene Typen
 Dabei haben alle Wirte der Übersicht halber Namen erhalten, die eine einfache und eindeutige Identifikation des Typen ermöglichen.
 So bestehen die Barkeeper-Entitäten aus den Barkeepern mit den Namen Albus von Pilsner, Bartholomeus von Pilsner, Enolf von Pilsner, Gottfried Metkrug, Hubert Metkrug, Oswald Branntwein und Roland Branntwein.
 
-### Räumliche Einheiten
-- Grid (Umgebung)
-- Continuous Space (Agenten)
+### Räumliche Einheiten und zeitliche Skalierung
+Das sich die Modelldynamik ähnlich wie die eines Räuber-Beute Modells verhält, wird das Grid zur darstellung der Bar, sowie der festen Barelemente zur Interaktion der Agenten genutzt, sowie ein Continuous Space, auf dem die Agenten sich bewegen.
+Die Größe des Grids ist durch Höhen- und Breiten Paramter Ganzzahlig vor Beginn des Simulationslaufes festlegbar. Für die Größe eines Felder ist keine feste Einheit gegeben. Das Modell verwendet Sticky-Borders.
+Ein zeitlicher Maßstab ist asynchron durch Ticks gegeben, bei denen ein Tick als eine vergangene Sekunde gerechnet wird. 
 
 ### Umgebung
-- Auf Grid
-- stellt Lokal mit Tischen und Theke dar
-- jede Zelle entweder tisch, Boden oder Theke
+Die Umgebung auf dem Grid stellt ein Lokal mit Tischen und Theke dar, wobei jedes Feld mit Tisch, Boden oder Theke gesetzt ist. Mit der durch angegebenen Parameter für Tischdichte wird bei Initialisierung der Bar die Wahrscheinlichkeit festgelegt, bei der eine Bar-Zelle (ausgenommen Theke) ein Tisch-Element wird. Zellen, die Tische darstellen, können von Gästen besetzt, jedoch nicht von Wirt-Agenten begangen werden.
 
 ### Kollektive
 In diesem Modell sind bis auf die Wirttypen `Oswald`und `Gottfried` keine Kollektive vorhanden.
 
 #### Gottfried Metkrug
-Bei dem Wirttyp "Gottfried Metkrug" wird die Gesamtheit der Wirte in zwei Gruppen aufgeteilt, wobei die Erste nur Bestellungen aufnimmt und die Zweite diese bearbeitet. Der prozentuale Anteil der jeweiligen Gruppen wird dabei bei Erzeugung der Wirte spezifiziert.
+Bei dem Wirttyp `Gottfried Metkrug` wird die Gesamtheit der Wirte in zwei Gruppen aufgeteilt, wobei die Erste nur Bestellungen aufnimmt und die Zweite diese bearbeitet. Der prozentuale Anteil der jeweiligen Gruppen wird dabei bei Erzeugung der Wirte spezifiziert.
 
 #### Oswald Branntwein
 Agenten des Wirttyps `Oswald` werden über eine gemeinsame Bestellliste, auf die jede Instanz zugreifen kann und auf der alle bereits bewirteten Gastinstanzen verzeichnet sind, kollektiviert.
 
-### Räumliche und zeitliche Skalierung
-- asynchrone updates
-- keine Einheit für größe
-- sticky borders (wie Wände im Lokal)
-- 1 Sekunde pro Tick
-
 * * *
 ## 3. Prozessübersicht und Terminierung
 <img src="global_diagram.jpg"/>
-- Vorgehen von jedem Agenten kurz beschreiben
 
 ### Gast
-Da der Fokus dieses Modells auf Prozessstrategien für die Barkeeper liegt, ist ein Agent vom Typ `Gast` sehr Schlicht gehalten und erfüllt ein minimum an Logik um Operationen wie Bestellung und Konsum zu ermöglichen. Die Besonderheit dieses Agententyps ist die zufällige Erscheinung an einem zufälligen Tisch in der Bar, sowie die vorher durch Parameter festgelegte Durstgrenze, die bei Erreichen für das Entfernen der Agenteninstanz des Gastes sorgt.
+Da der Fokus dieses Modells auf Prozessstrategien für die Barkeeper liegt, ist ein Agent vom Typ `Gast` sehr Schlicht gehalten und erfüllt ein Minimum an Logik um Operationen wie `Bestellung` und `Konsum` zu ermöglichen. Die Besonderheit dieses Agententyps ist die (parametrisiert) zufällige Erscheinung an einem zufälligen Tisch in der Bar, sowie die vorher ebenfalls durch Parameter festgelegte Durstgrenze, die bei Erreichen für das Entfernen der Agenteninstanz des Gastes vom Grid sorgt.
 Im Ausgangszustand befindet sich ein neuer Gast in einem nicht durstigen Zustand, in dem er mit einer festgelegten Wahrscheinlichkeit von 50% trotzdem ein Getränk bestellt. Steigt der Durstwert über die Bestellgrenze, bestellt er immer. Wird dem Agenten ein Getränk geliefert, wird es unabhängig vom Durstwert konsumiert, worauf der Durstwert sinkt. Um das Modell simpel zu halten, wird davon ausgegangen, dass Getränke in einem Zeitschritt rückstandslos konsumiert werden. 
 
 ### Bartholomeus von Pilsner
@@ -83,7 +75,7 @@ Ein Beispiel hierfür ist der Ausgangszustand der Bar, in dem meist zunächst we
 ***Questions:*** There are eleven design concepts. Most of these were discussed extensively by Railsback (2001) and Grimm and Railsback (2005; Chapter. 5), and are summarized here via the following questions:
 
 ### Grundprinzipien
-Es wurde kein vergleichbares Modell in der Vorlesung kennengelernt. Stattdessen handelt es sich um eine Mischung verschiedener in der Vorlesung kennengelernter Modelle. So kommen beispielsweise Ansätze von Räuber-Beute Modellen und Teile des Sugrascape Modells in Kombination mit anderen Modellansätzen zum Einsatz.
+Es wurde kein vergleichbares Modell in der Vorlesung kennengelernt. Stattdessen handelt es sich um eine Mischung verschiedener in der Vorlesung kennengelernter Modelle. So kommen beispielsweise Ansätze von Räuber-Beute Modellen und Teile des Sugarscape Modells in Kombination mit anderen Modellansätzen zum Einsatz.
 
 ### Emergenz 
 Das System ist stark emergent. So lässt sich aus der Strategie des gewählten Barkeepers nur schwer bis gar nicht die Güte des Systems bestimmen.
@@ -92,10 +84,9 @@ Das System ist stark emergent. So lässt sich aus der Strategie des gewählten B
 - von Agent abhängig
 
 #### Gast
-- initial kein durst
-- wenn dürsteschwelle erreicht, dann durst
-- bei kein durst, bei 50% der Nachfragen durch Wirt bestellen
-- bei durst immer bestellen
+Durch die vorher durch Paramter festgelegte Erscheinungswahrscheinlichkeit eines Gastes wird eine neuer Agent erstellt, der zufällig auf einem freien Tisch in der Bar platziert wird.
+Ein Gast hat initial keinen Durst und lehnt in diesem Zustand mit einer parametrisierten Wahrscheinlichkeit Bestellanfragen von Wirt-Agenten ab.
+Ist seine Durstschwelle durch den mit pro Tick ansteigenden Durstwert erreicht, wird bei Bestellanfrage von einem Wirt-Agent immer ein Getränk bestellt. Ein Gast-Agent wird auf dem Grid verbleiben, bis sein Durstwert die Durstgrenze erreicht hat. 
 
 #### Albus von Pilsner
 Initial wählt Albus seine als nächstes zu beliefernden Gäste und wechselt in den Zustand `Bestellung aufnehmen`.
@@ -117,9 +108,10 @@ Da Anfangs keine Gäste (und somit auch keine offenen Bestellungen) vorhanden si
 Der eine Teil der Wirte wechselt zwischen dem Zustand `ORDER`, falls Gäste ohne offene Bestellungen vorhanden sind und `IDLE`, wenn dies nicht der Fall ist. Der andere Teil der Wirte befindet sich entweder an der Bar (in dem Status `BAR`), oder beliefert Gäste.
 
 #### Oswald Branntwein
+Siehe Roland Branntwein.
 
 #### Roland Branntwein
-
+Roland befindet sich initial im Zustand `IDLE`, bis der erste Gast-Agent kreiert wird. Befinden sich Gäste in der Bar, wechselt Roland in den ersten Bestellzyklus, der mit dem Zustand `ORDER` beginnt. Hier wird zunächst der Gast mit dem höchsten `Distanz / Wartezeit`-Wert ausgewählt und bewirtet wird, wonach mit gleichem Prinzip weitere Gäste - allerdings in einem Radius von 20 Zellen auf dem Grid - bearbeitet werden bis das `storageLimit` erreicht ist. Ist dies der Fall, wechselt der Barkeeper erst in den Zustand `REFILL`, in dem an dem nahesten Thekenelement die Getränke für die Gäste bereitstellt (fiktiv in einer Liste) werden, wonach dieser im Zustand `DELIVER` anfängt, alle Gäste in Bestellreihenfolge zu beliefern. Dabei werden betroffene Einträge aus den genutzten Listen entfernt, sowie Wartezeiten der bearbeiteten Gäste zurückgesetzt. Wurden alle Gäste (die noch in der Bar verblieben sind) auf der Liste bearbeitet, befindet sich Roland wieder im Ausgangszustand des Bestellzyklus `ORDER`.
 
 ### Ziele 
 Ein Gast verfolgt das Ziel, nicht zu durstig zu werden, dennoch aber auch nicht durchgehend zu trinken.
@@ -129,6 +121,8 @@ Gleichzeitig wollen Barkeeper die Gäste beliefern und so die Gäste in der Bar 
 Die Agenten dieses Modells beinhalten keinen Lernprozess.
 
 ### Vorhersage
+Gast-Agenten planen in diesem Modell nicht für die Zukunft und treffen keine Vorhersagen.
+Wirte hingegen entscheiden sich vor Bestellungsvorgang und Belieferung für einen Gast, der als nächstes bearbeitet werden soll. Die Vorgehensweise der einzelnen Wirte ist dabei ungleich, jedoch ähnlich. Somit wird bei Bestellungsaufnahme die Vorhersage "Der Gast wird beliefert werden" getroffen, welche allerdings durch Bestellverhalten des Gastes, sowie durch ein mögliches Verlassen der Bar bei Lieferungsvorgang des Wirtes abweichen können.
 - Gäste planen nicht für die Zukunft und treffen keine Vorhersagen
 - Wirte entscheiden sich vor Belieferung eines Gastes für einen Gast, bei dem die die bestellung aufnehmen und ihn anschließend beliefern. (sagen "der Gast wird beliefert werden")
 
