@@ -42,7 +42,7 @@ Agenten des Wirttyps `Oswald` werden über eine gemeinsame Bestellliste, auf die
 
 * * *
 ## 3. Prozessübersicht und Terminierung
-- allgemeines Agentendiagramm einfügen
+<img src="global_diagram.jpg"/>
 - Vorgehen von jedem Agenten kurz beschreiben
 
 ### Gast
