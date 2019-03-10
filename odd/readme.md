@@ -110,9 +110,11 @@ Siehe Albus von Pilsner.
 #### Enolf von Pilsner
 Siehe Albus von Pilsner.
 
-#### Gottfried Metkrug
-
 #### Hubert Metkrug
+Da Anfangs keine Gäste (und somit auch keine offenen Bestellungen) vorhanden sind, befinden sich alle Wirte zuerst in dem Zustand `IDLE` und wechseln in den Zustand `ORDER`, sobald die ersten Gäste eintreffen. Daraufhin wechseln abhängig von dem Anteil der Gäste mit offenen Bestellungen zufällig einige der Wirte in den Zustand `BAR`. Nachdem Diese die Getränke an der Bar abgeholt haben, beliefern sie die jeweiligen Gäste und wechseln in den Status `IDLE`. Es wird dabei in jedem Zeitschritt geprüft, ob sich die zu beliefernden Gäste noch in dem Lokal befinden und falls dies nicht der Fall ist, werden die betroffenen Bestellungen verworfen.
+
+#### Gottfried Metkrug
+Der eine Teil der Wirte wechselt zwischen dem Zustand `ORDER`, falls Gäste ohne offene Bestellungen vorhanden sind und `IDLE`, wenn dies nicht der Fall ist. Der andere Teil der Wirte befindet sich entweder an der Bar (in dem Status `BAR`), oder beliefert Gäste.
 
 #### Oswald Branntwein
 
