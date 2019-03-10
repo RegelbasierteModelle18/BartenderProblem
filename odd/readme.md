@@ -180,29 +180,52 @@ Um dies zu erreichen, wird zuerst zu jedem Barkeeper-Typ die durchschnittliche G
 <img src="RolandBranntwein1.png" />
 <img src="RolandBranntwein2.png" />
 
+Die mittlere Gästezahl nach 3000 Schritten wächst bei Roland Branntwein in Abhängigkeit von der Barkeeperzahl beschränkt gegen etwa die Hälfte der maximalen Gastkapazität. Gleichzeitig nimmt die Standardabweichung mit zunehmender Barkeeperzahl ab uns hält sich dann etwa in einem Bereich von 4 auf.
+
 ### Oswald Branntwein
 <img src="OswaldBranntwein1.png" />
 <img src="OswaldBranntwein2.png" />
+
+Die mittlere Gästezahl von Oswald wächst ähnlich zu der von Roland Branntwein, hat jedoch einen höheren Grenzwert. Gleichzeitig bleibt die Standardabweichung konstant.
 
 ### Hubert Metkrug
 <img src="HubertMetkrug1.png" />
 <img src="HubertMetkrug2.png" />
 
+Genau wie Oswald und Roland, weist Hubert Metkrug ein scheinbar begrenztes Wachstum auf. Dabei ist die Effizienz bei höherer Barkeeperzahl jedoch höher als bei Roland und Oswald. Gleichzeitig ist die Standardabweichung jedoch größer als die von Roland uns Oswald, was auf eine instabilere Gastverteilung hinweist.
+
 ### Gottfried Metkrug
 <img src="GottfriedMetkrug1.png" />
 <img src="GottfriedMetkrug2.png" />
+
+Rottfried Metkrug scheint eine lineare Skalierung mit zunehmender Barkeeperzahl aufzuweisen. Dabei ist die Effizienz die bisher schlechteste. Zudem zeigt Gottfried ähnlich wie Hubert eine starke Schwankung der Gstanzahl.
 
 ### Bartholomeus von Pilsner
 <img src="BartholomeusVonPilsner1.png" />
 <img src="BartholomeusVonPilsner2.png" />
 
+Bartholomeus von Pilsner zeigt eine ähnliche Skalierung wie Gorrfried Metkrug und gehört ebenfalls zu den in dem Bessbereich ineffizientesten Barkeepern. Dabei sind die Ergebnisse der Gastanzahl jedoch konsistender, sprich die Ergebnisse der verschiedenen Durchläufe schwanken nicht so stark und befinden sich strikt nah an der Trendlinie. Dennoch schwankt die Gästeanzahl innerhalb eines Durchlaufs ähnlch zu Gottfried Metkrug mit am stärksten.
+
 ### Enolf von Pilsner
 <img src="EnolfVonPilsner1.png" />
 <img src="EnolfVonPilsner2.png" />
+
+Enolf von Pilsner stellt eine starke Verbesserzng zu Bartholomeus von Pilsner dar.
+So steigt die Effizienz auf ein ähnliches Niveau wie Hubert Metkrug und ist bei hohen Barkeeperzahlen etwas Leistungsfähiger als Hubert. Ähnlich wie Roland nimmt die Schwankung mit zunehmender Barkeeperzahl ab und hält sich in einem mit Roland vergleichbaren Bereich auf.
 
 ### Albus von Pilsner
 <img src="AlbusVonPilsner1.png" />
 <img src="AlbusVonPilsner2.png" />
 
+Albus zeichnet sich wie die meisten anderen Barkeeper durch ein begrenztes Wachswum aus.
+Dabei befindes sich der Grenszwert jedoch nah an der maximalen Gästeanzahl und zeichnet sich somit durch seine hohe Effizienz aus.
+Die Standardabweichung der Gästeanzahl nimmer zeitgleich am stärksten aller Modelle ab und endet am ende des Messbereichts bei einem tiefstwert von etwa 3.
+
 ### Kombiniert
 <img src="combinedResult.png" />
+
+Allgemein ist zu erkennen, dass die Stategie des Albus von Pilsner eine herausragende Leistungsfähigkeit zeigt und somit mit Abstand die größte Gastzahl bietet.
+Zudem Skaliert die Strategie von Albus von Pilsner besser alls alle andere Strategien mit zunehmender Barkeeperzahl und läuft dabei gegen die maximal mögliche Gastanzahl.
+Denoch fällt auf, dass andere Strategien, wie die von Gottfried Metkrug scheinbar linear skalieren. Dabei stellt sich die Frage, ob dies bei weiter zunehmender Barkeeperzahl weiterhin der Fall sein wird und irgendwann die die maximale Gastanzahl erreicht wird. Dennoch ist die Effizenz auch dieser Strategien ab einer Barkeeperzahl von etwa zehn nicht annähernd so gut, wie die des Albus von Pilsner.
+
+Demnach stellt sich die Strategie von Albus von Pilsner als die beste gefundene heraus.
