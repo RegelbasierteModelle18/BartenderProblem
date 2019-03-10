@@ -7,16 +7,14 @@ Die folgende Modellbeschreibung folgt dem ODD-Schema für ein individuelles, age
 
 
 ## 1. Modellzewck
-- Optimale Policy der Wirte für Maximierung der Gästeanzahl
+In diesem Modell geht es darum, eine optimale Strategie zum Bewirtschaften der Gäste für Barkeeper zu finden. Dabei ist die Güte einer Strategie die maximale Anzahl der Gäste in Kombination mit der Schwankung der Gästeanzahl, wobei eine hohe Gästedichte mit geringer Schwankung das Perfekte Ergebnis darstellt. Gleichzeitig bleiben Eigenschaften wie Bewegungsgeschwindikeit der Barkeeper oder Verhalten der Gäste konstant.
 
 * * *
 ## 2. Entitäten, Zustandsvariablen und Skalen
 ### Agenten
-alle auflisten
-- ein Gasttyp
-- 7 verschiedene Strategien für bedienung der Gäste durch Wirte - somit auch 7 verschiedene Wirttypen
-- alle Wirte haben der Übersicht halber Namen erhalten
-- alle Namen auflisten
+Die Entitäten des Systems werden durch einen Gast und sieben verschiedene Typen von Barkeepern mit jeweils individuellen Strategien dargestellt.
+Dabei haben alle Wirte der Übersicht halber Namen erhalten, die eine einfache und eindeutige Identifikation des Typen ermöglichen.
+So bestehen die Barkeeper-Entitäten aus den Barkeepern mit den Namen Albus von Pilsner, Bartholomeus von Pilsner, Enolf von Pilsner, Gottfried Metkrug, Hubert Metkrug, Oswald Branntwein und Roland Branntwein.
 
 ### Räumliche Einheiten
 - Grid (Umgebung)
@@ -51,11 +49,18 @@ Agenten des Wirttyps `Oswald` werden über eine gemeinsame Bestellliste, auf die
 Da der Fokus dieses Modells auf Prozessstrategien für die Barkeeper liegt, ist ein Agent vom Typ `Gast` sehr Schlicht gehalten und erfüllt ein minimum an Logik um Operationen wie Bestellung und Konsum zu ermöglichen. Die Besonderheit dieses Agententyps ist die zufällige Erscheinung an einem zufälligen Tisch in der Bar, sowie die vorher durch Parameter festgelegte Durstgrenze, die bei Erreichen für das Entfernen der Agenteninstanz des Gastes sorgt.
 Im Ausgangszustand befindet sich ein neuer Gast in einem nicht durstigen Zustand, in dem er mit einer festgelegten Wahrscheinlichkeit von 50% trotzdem ein Getränk bestellt. Steigt der Durstwert über die Bestellgrenze, bestellt er immer. Wird dem Agenten ein Getränk geliefert, wird es unabhängig vom Durstwert konsumiert, worauf der Durstwert sinkt. Um das Modell simpel zu halten, wird davon ausgegangen, dass Getränke in einem Zeitschritt rückstandslos konsumiert werden. 
 
-### Albus von Pilsner
-
 ### Bartholomeus von Pilsner
+Bartholomeus kann zu jedem Zeitpunkt einen Gast beliefern. So besitzt er ein Feld für den aktuellen Gast und ein Feld für das Getränk, welches der Gast bestellt hat, bzw. welches er mit sich trägt, um es dem entsprechenden Gast zu liefern.
+Zudem ist Bartholomeus Zustandsgesteuert und besitzt die drei Zustände `Bestellung aufnehmen`, `Liefern` und `Getränke holen`. Dementsprechend handelt er von seinen Zuständen abhängig unterschiedlich: Nimmt er aktuell eine Bestellung auf, bewegt er sich in Richtung des Gastes, den er zuvor gewählt hatte. Im Zustand `Liefern` bringt er sein aktuelles Getränk zum entsprechenden Gast. Holt Bartholomeus aktuell Getränke, ist er auf dem Weg zum nächsten Barfeld, um die zuvor aufgenommene Bestellung vorzubereiten. Verlässt sein aktueller Gast zu einem beliebigen Zeitpunkt die Bar oder hat er noch keinen Gast gewählt, lässt er seinen aktuellen Bestellungsvorgang verfallen und wählt einen neuen Gast zufällig aus der Menge aller Gäste.
 
 ### Enolf von Pilsner
+Bei Enolf von Pilsner handelt es sich um eine Weiterentwicklung von Bartholomeus von Pilsner.
+Enolf teilt im Gegensatz zu Bartholomeus die Umgebung mit Hilfe eines Quadtrees, in dem je nach Anzahl der gewünschten Partitionen auch Felder verbinden und somit größer als die übrigen Felder werdenkönnen, auf und verteilt die Partitionen auf die Enolf-Instanzen, um keine Überschneidungen der Zustandsbereiche zu erzeugen und durch kurze Wege der Barkeeper eine gleichmäßige Verteilung der Gäste auf den Tischen zu forcieren. Findet eine Enolf.Instanz keinen Gast in seinem Zustandsbereich, so verfährt sie wie Bartholomeus von Pilsner und wählt einen zufälligen Gast.
+
+### Albus von Pilsner
+Albus von Pilsner ist eine Weiterentwicklung von Enolf von Pilsner.
+So handelt Albus genau wie Enolf und teilt sie Umgebung in Zuständigkeitsbereiche ein, kann jedoch statt nur einer Bestellung mehrere Betellungen aufnehmen.
+So werden immer mehrere Gäste gewählt, die sich in einem vorher bestimmten Umkreis befinden, um diese zu beliefern.
 
 ### Gottfried Metkrug
 
@@ -76,11 +81,10 @@ Ein Beispiel hierfür ist der Ausgangszustand der Bar, in dem meist zunächst we
 ***Questions:*** There are eleven design concepts. Most of these were discussed extensively by Railsback (2001) and Grimm and Railsback (2005; Chapter. 5), and are summarized here via the following questions:
 
 ### Grundprinzipien
-- an sich kein vergleichbares Modell in der Vorlesung kennengelernt
+Es wurde kein vergleichbares Modell in der Vorlesung kennengelernt. Stattdessen handelt es sich um eine Mischung verschiedener in der Vorlesung kennengelernter Modelle. So kommen beispielsweise Ansätze von Räuber-Beute Modellen und Teile des Sugrascape Modells in Kombination mit anderen Modellansätzen zum Einsatz.
 
 ### Emergenz 
-- stark emergent
-- aus Strategie lässt sich nicht Güte des Systems schließen
+Das System ist stark emergent. So lässt sich aus der Strategie des gewählten Barkeepers nur schwer bis gar nicht die Güte des Systems bestimmen.
 
 ### Adaptivität
 - von Agent abhängig
@@ -92,10 +96,17 @@ Ein Beispiel hierfür ist der Ausgangszustand der Bar, in dem meist zunächst we
 - bei durst immer bestellen
 
 #### Albus von Pilsner
+Initial wählt Albus seine als nächstes zu beliefernden Gäste und wechselt in den Zustand `Bestellung aufnehmen`.
+Hat er alle Bestellungen aufgenommen, wechselt er in den `Getränke holen` (im Code auch `FILL_UP`) Zustand, um die aufgenommenen Bestellungen von der Theke zu holen.
+Hat er die Theke erreicht, wechselt er in den `Liefern` (in Code `DELIVER`) Zustand, um die Getränke zu den Gästen zu bringen.
+Nach Erreichen der Theke wählt er wieder seine Gäste und wechselt in den `Bestellung aufnehmen` (im Code `TAKE_ORDER`) Zustand.
+Auch wenn Seine Gäste das Lokal verlassen, wählt er neue Gäste und wechselt in den `Bestellung aufnehmen` Zustand.
 
 #### Bartholomeus von Pilsner
+Siehe Albus von Pilsner.
 
 #### Enolf von Pilsner
+Siehe Albus von Pilsner.
 
 #### Gottfried Metkrug
 
@@ -107,11 +118,11 @@ Ein Beispiel hierfür ist der Ausgangszustand der Bar, in dem meist zunächst we
 
 
 ### Ziele 
-- Gast hat Ziel, nicht zu durstig zu werden, aber auch nicht zu sitt zu werden
-- alle Wirte wollen Gäste beliefern, damit Gäste bleiben
+Ein Gast verfolgt das Ziel, nicht zu durstig zu werden, dennoch aber auch nicht durchgehend zu trinken.
+Gleichzeitig wollen Barkeeper die Gäste beliefern und so die Gäste in der Bar halten.
 
 ### Lernen 
-- die lernen nicht, sind nämlich n bissle dumm
+Die Agenten dieses Modells beinhalten keinen Lernprozess.
 
 ### Vorhersage
 - Gäste planen nicht für die Zukunft und treffen keine Vorhersagen
@@ -120,12 +131,12 @@ Ein Beispiel hierfür ist der Ausgangszustand der Bar, in dem meist zunächst we
 ### Wahrnehmung 
 
 #### Gast
-- gast nimmt Umgebung nicht wahr und agiert nur, wenn er zu viel durst hat, oder ein Wirt nach Getränk fragt
+Der Gast nimmt die Umgebung nicht wahr und agiert nur, wenn seine Durstschwelle überschritten ist, welche das Verlassen der BAr initiiert. Zudem Teilt ein Gast einem Barkeeper sein Wunschgetränk mit, wenn der Barkeeper nach dem Getränk fragt. Außerdem handelt der Gast bei Lieferung seines Getränks, welche jedoch genau wie die Bestellungsaufnahme durch den Barkeeper eingeleitet wird.
 
 #### Wirt
-- sehen die ganze umgebung / bar
-- sehen alle Gäste
-- interagieren nur mit Gästen in unmittelbarer Umgebung
+Wirte (auch Barkeeper) sehen die gesamte Bar und alle Gäste.
+So haben die Barkeeper nicht die Möglichkeit, sich über Tische zu bewegen und Interagieren nur mit Gästen in ihrer unmittelbaren Umgebung. Diese Interaktion findet entweder im Kontext der Bestellungsaufnahme oder der Getränkeliferung statt.
+Zudem bereiten Wirte bei Erreichen der Bar ihre Bestellungen vor, interagieren dabei jedoch nicht mit der Bar, oder anderen Barkeepern. 
 
 
 ### Interaktion 
@@ -142,9 +153,9 @@ Ein Beispiel hierfür ist der Ausgangszustand der Bar, in dem meist zunächst we
 - Bestellungsaufnahmen von undurstigen Gästen ist zufällig
 
 ### Beobachtung 
-- batch runs in Excel Tabellen
-- Auswertung als Excel Tabelle
-- Dabei besonders mittlere Gastanzahl, Standardabweichung der Gäste in Abhängigkeit von Wirtanzahl nach bestimmter Zeit (nach Erreichen des Maximums) betrachtet
+Um das System zu beobachten, wird die Gäste- und Barkeeperzahl über alle Zeitschritte mitgeschrieben.
+Dies wird sowohl in einem Graphen in Repast Simphony, als auch bei Batch runs eingesetzt.
+Die Ergebnisse der Batch runs werden mit Hilfe des Tabellenkaluationsprogramms Excel ausgewertet, um Gästeanzahlen und Standardabweichung der Gästeanzahlen zu bestimmen.
 
 * * *
 ## 5. Initialisierung
@@ -155,11 +166,43 @@ Ein Beispiel hierfür ist der Ausgangszustand der Bar, in dem meist zunächst we
 
 * * *
 ## 6. Eingabedaten
-- keine Eingabedaten externer Quellen
+Es existieren keine Eingabedaten externer Quellen.
 
 * * *
 ## 7. Submodelle
-- verwendet keine submodelle
+Submodelle sind nicht vorhanden und würden in diesem Umfeld den Rahmen sprengen.
 
 ## 8. Ergebnisse
-- Batch runs einfügen
+Hier werden unsere Ergebnisse des Modells knapp ausgewertet.
+Um dies zu erreichen, wird zuerst zu jedem Barkeeper-Typ die durchschnittliche Gästeanzahl und die Standardabweichung der Gästezahlen nach 3000 Zeitschritten, also nach Einpendeln der Gästeanzahl, in Abhöngigkeit von der Barkeeperzahl aufgezeigt und anschließend die durchschnittliche Gästeanzahl in Abhängigkeit von der Barkeeperzahl aller Barkeeper-Typen verglichen. Allen Diegrammen wurden Trendlinien eingezeichnet, um eine Darstellung zu vereinfachen.
+
+### Roland Branntwein
+<img src="RolandBranntwein1.png" />
+<img src="RolandBranntwein2.png" />
+
+### Oswald Branntwein
+<img src="OswaldBranntwein1.png" />
+<img src="OswaldBranntwein2.png" />
+
+### Hubert Metkrug
+<img src="HubertMetkrug1.png" />
+<img src="HubertMetkrug2.png" />
+
+### Gottfried Metkrug
+<img src="GottfriedMetkrug1.png" />
+<img src="GottfriedMetkrug2.png" />
+
+### Bartholomeus von Pilsner
+<img src="BartholomeusVonPilsner1.png" />
+<img src="BartholomeusVonPilsner2.png" />
+
+### Enolf von Pilsner
+<img src="EnolfVonPilsner1.png" />
+<img src="EnolfVonPilsner2.png" />
+
+### Albus von Pilsner
+<img src="AlbusVonPilsner1.png" />
+<img src="AlbusVonPilsner2.png" />
+
+### Kombiniert
+<img src="combinedResult.png" />
