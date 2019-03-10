@@ -29,7 +29,7 @@ So bestehen die Barkeeper-Entitäten aus den Barkeepern mit den Namen Albus von 
 In diesem Modell sind bis auf die Wirttypen `Oswald`und `Gottfried` keine Kollektive vorhanden.
 
 #### Gottfried Metkrug
-- einige bringen, andere nehmen auf
+Bei dem Wirttyp "Gottfried Metkrug" wird die Gesamtheit der Wirte in zwei Gruppen aufgeteilt, wobei die Erste nur Bestellungen aufnimmt und die Zweite diese bearbeitet. Der prozentuale Anteil der jeweiligen Gruppen wird dabei bei Erzeugung der Wirte spezifiziert.
 
 #### Oswald Branntwein
 Agenten des Wirttyps `Oswald` werden über eine gemeinsame Bestellliste, auf die jede Instanz zugreifen kann und auf der alle bereits bewirteten Gastinstanzen verzeichnet sind, kollektiviert.
