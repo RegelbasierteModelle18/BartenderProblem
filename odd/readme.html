@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-alpha/dist/katex.min.css" integrity="sha384-BTL0nVi8DnMrNdMQZG1Ww6yasK9ZGnUxL1ZWukXQ7fygA1py52yPp9W4wrR00VML" crossorigin="anonymous">
+        <style>
+/*--------------------------------------------------------------------------------------------- * Copyright (c) Microsoft Corporation. All rights reserved. * Licensed under the MIT License. See License.txt in the project root for license information. *--------------------------------------------------------------------------------------------*/ body { font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback"; font-size: 14px; padding: 0 26px; line-height: 22px; word-wrap: break-word; } #code-csp-warning { position: fixed; top: 0; right: 0; color: white; margin: 16px; text-align: center; font-size: 12px; font-family: sans-serif; background-color:#444444; cursor: pointer; padding: 6px; box-shadow: 1px 1px 1px rgba(0,0,0,.25); } #code-csp-warning:hover { text-decoration: none; background-color:#007acc; box-shadow: 2px 2px 2px rgba(0,0,0,.25); } body.scrollBeyondLastLine { margin-bottom: calc(100vh - 22px); } body.showEditorSelection .code-line { position: relative; } body.showEditorSelection .code-active-line:before, body.showEditorSelection .code-line:hover:before { content: ""; display: block; position: absolute; top: 0; left: -12px; height: 100%; } body.showEditorSelection li.code-active-line:before, body.showEditorSelection li.code-line:hover:before { left: -30px; } .vscode-light.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); } .vscode-light.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); } .vscode-light.showEditorSelection .code-line .code-line:hover:before { border-left: none; } .vscode-dark.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); } .vscode-dark.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); } .vscode-dark.showEditorSelection .code-line .code-line:hover:before { border-left: none; } .vscode-high-contrast.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 160, 0, 0.7); } .vscode-high-contrast.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 160, 0, 1); } .vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before { border-left: none; } img { max-width: 100%; max-height: 100%; } a { text-decoration: none; } a:hover { text-decoration: underline; } a:focus, input:focus, select:focus, textarea:focus { outline: 1px solid -webkit-focus-ring-color; outline-offset: -1px; } hr { border: 0; height: 2px; border-bottom: 2px solid; } h1 { padding-bottom: 0.3em; line-height: 1.2; border-bottom-width: 1px; border-bottom-style: solid; } h1, h2, h3 { font-weight: normal; } h1 code, h2 code, h3 code, h4 code, h5 code, h6 code { font-size: inherit; line-height: auto; } table { border-collapse: collapse; } table > thead > tr > th { text-align: left; border-bottom: 1px solid; } table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td { padding: 5px 10px; } table > tbody > tr + tr > td { border-top: 1px solid; } blockquote { margin: 0 7px 0 5px; padding: 0 16px 0 10px; border-left-width: 5px; border-left-style: solid; } code { font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback"; font-size: 14px; line-height: 19px; } body.wordWrap pre { white-space: pre-wrap; } .mac code { font-size: 12px; line-height: 18px; } pre:not(.hljs), pre.hljs code > div { padding: 16px; border-radius: 3px; overflow: auto; } /** Theming */ pre code { color: var(--vscode-editor-foreground); } .vscode-light pre:not(.hljs), .vscode-light code > div { background-color: rgba(220, 220, 220, 0.4); } .vscode-dark pre:not(.hljs), .vscode-dark code > div { background-color: rgba(10, 10, 10, 0.4); } .vscode-high-contrast pre:not(.hljs), .vscode-high-contrast code > div { background-color: rgb(0, 0, 0); } .vscode-high-contrast h1 { border-color: rgb(0, 0, 0); } .vscode-light table > thead > tr > th { border-color: rgba(0, 0, 0, 0.69); } .vscode-dark table > thead > tr > th { border-color: rgba(255, 255, 255, 0.69); } .vscode-light h1, .vscode-light hr, .vscode-light table > tbody > tr + tr > td { border-color: rgba(0, 0, 0, 0.18); } .vscode-dark h1, .vscode-dark hr, .vscode-dark table > tbody > tr + tr > td { border-color: rgba(255, 255, 255, 0.18); } 
+</style>
+<style>
+/* Tomorrow Theme */ /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */ /* Original theme - https://github.com/chriskempson/tomorrow-theme */ /* Tomorrow Comment */ .hljs-comment, .hljs-quote { color: #8e908c; } /* Tomorrow Red */ .hljs-variable, .hljs-template-variable, .hljs-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class, .hljs-regexp, .hljs-deletion { color: #c82829; } /* Tomorrow Orange */ .hljs-number, .hljs-built_in, .hljs-builtin-name, .hljs-literal, .hljs-type, .hljs-params, .hljs-meta, .hljs-link { color: #f5871f; } /* Tomorrow Yellow */ .hljs-attribute { color: #eab700; } /* Tomorrow Green */ .hljs-string, .hljs-symbol, .hljs-bullet, .hljs-addition { color: #718c00; } /* Tomorrow Blue */ .hljs-title, .hljs-section { color: #4271ae; } /* Tomorrow Purple */ .hljs-keyword, .hljs-selector-tag { color: #8959a8; } .hljs { display: block; overflow-x: auto; color: #4d4d4c; padding: 0.5em; } .hljs-emphasis { font-style: italic; } .hljs-strong { font-weight: bold; }
+</style>
+<style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="odd-protokoll---bartender-problem-model">ODD Protokoll - Bartender Problem Model</h1>
+<p>Malte kl. Piening, Mark Hiltenkamp, Christoph Meyer</p>
+<p>Angewandte Systemwissenschaften: Regelbasierte Modelle (WS18/19)</p>
+<p>Die folgende Modellbeschreibung folgt dem ODD-Schema für ein individuelles, agentenbasiertes Modell. (Grim et al. 2006, 2010)</p>
+<h2 id="1-modellzewck">1. Modellzewck</h2>
+<p>In diesem Modell geht es darum, eine optimale Strategie zum Bewirtschaften der Gäste für Barkeeper zu finden. Dabei ist die Güte einer Strategie die maximale Anzahl der Gäste in Kombination mit der Schwankung der Gästeanzahl, wobei eine hohe Gästedichte mit geringer Schwankung das Perfekte Ergebnis darstellt. Gleichzeitig bleiben Eigenschaften wie Bewegungsgeschwindikeit der Barkeeper oder Verhalten der Gäste konstant.</p>
+<hr>
+<h2 id="2-entit%C3%A4ten-zustandsvariablen-und-skalen">2. Entitäten, Zustandsvariablen und Skalen</h2>
+<h3 id="agenten">Agenten</h3>
+<p>Die Entitäten des Systems werden durch einen Gast und sieben verschiedene Typen von Barkeepern mit jeweils individuellen Strategien dargestellt.
+Dabei haben alle Wirte der Übersicht halber Namen erhalten, die eine einfache und eindeutige Identifikation des Typen ermöglichen.
+So bestehen die Barkeeper-Entitäten aus den Barkeepern mit den Namen Albus von Pilsner, Bartholomeus von Pilsner, Enolf von Pilsner, Gottfried Metkrug, Hubert Metkrug, Oswald Branntwein und Roland Branntwein.</p>
+<h3 id="r%C3%A4umliche-einheiten-und-zeitliche-skalierung">Räumliche Einheiten und zeitliche Skalierung</h3>
+<p>Das sich die Modelldynamik ähnlich wie die eines Räuber-Beute Modells verhält, wird das Grid zur Darstellung der Bar, sowie der festen Barelemente zur Interaktion der Agenten genutzt, sowie ein Continuous Space, auf dem die Agenten sich bewegen.
+Die Größe des Grids ist durch Höhen- und Breitenparameter ganzzahlig vor Beginn des Simulationslaufes festlegbar. Für die Größe eines Feldes ist keine feste Einheit gegeben. Das Modell verwendet Sticky-Borders.
+Ein zeitlicher Maßstab ist asynchron durch Ticks gegeben, bei denen ein Tick als eine vergangene Sekunde gerechnet wird.</p>
+<h3 id="umgebung">Umgebung</h3>
+<p>Die Umgebung auf dem Grid stellt ein Lokal mit Tischen und Theke dar, wobei jedes Feld als Tisch, Boden oder Theke gesetzt ist. Mit dem angegebenen Parameter für die Tischdichte wird bei Initialisierung der Bar die Wahrscheinlichkeit festgelegt, bei der eine Bar-Zelle (ausgenommen Theke) ein Tisch-Element wird. Zellen, die Tische darstellen, können von Gästen besetzt, jedoch nicht von Wirt-Agenten begangen werden.</p>
+<h3 id="kollektive">Kollektive</h3>
+<p>In diesem Modell sind bis auf die Wirttypen <code>Oswald</code>und <code>Gottfried</code> keine Kollektive vorhanden.</p>
+<h4 id="gottfried-metkrug">Gottfried Metkrug</h4>
+<p>Bei dem Wirttyp <code>Gottfried Metkrug</code> wird die Gesamtheit der Wirte in zwei Gruppen aufgeteilt, wobei die Erste nur Bestellungen aufnimmt und die Zweite diese bearbeitet. Der prozentuale Anteil der jeweiligen Gruppen wird dabei bei Erzeugung der Wirte spezifiziert.</p>
+<h4 id="oswald-branntwein">Oswald Branntwein</h4>
+<p>Agenten des Wirttyps <code>Oswald</code> werden über eine gemeinsame Bestellliste, auf die jede Instanz zugreifen kann und auf der alle bereits bewirteten Gastinstanzen verzeichnet sind, kollektiviert.</p>
+<hr>
+<h2 id="3-prozess%C3%BCbersicht-und-terminierung">3. Prozessübersicht und Terminierung</h2>
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/global_diagram.jpg"/>
+<h3 id="gast">Gast</h3>
+<p>Da der Fokus dieses Modells auf Prozessstrategien für die Barkeeper liegt, ist ein Agent vom Typ <code>Gast</code> sehr schlicht gehalten und erfüllt ein Minimum an Logik um Operationen wie <code>Bestellung</code> und <code>Konsum</code> zu ermöglichen. Die Besonderheit dieses Agententyps ist die (parametrisiert) zufällige Erscheinung an einem zufälligen Tisch in der Bar, sowie die vorher ebenfalls durch Parameter festgelegte Durstgrenze, die bei Erreichen für das Entfernen der Agenteninstanz des Gastes vom Grid sorgt.
+Im Ausgangszustand befindet sich ein neuer Gast in einem nicht durstigen Zustand, in dem er mit einer festgelegten Wahrscheinlichkeit von 50% trotzdem ein Getränk bestellt. Steigt der Durstwert über die Bestellgrenze, bestellt er immer. Wird dem Agenten ein Getränk geliefert, wird es unabhängig vom Durstwert konsumiert, worauf der Durstwert sinkt. Um das Modell simpel zu halten, wird davon ausgegangen, dass Getränke in einem Zeitschritt rückstandslos konsumiert werden.</p>
+<h3 id="bartholomeus-von-pilsner">Bartholomeus von Pilsner</h3>
+<p>Bartholomeus kann zu jedem Zeitpunkt einen Gast beliefern. So besitzt er ein Feld für den aktuellen Gast und ein Feld für das Getränk, welches der Gast bestellt hat bzw. welches er mit sich trägt, um es dem entsprechenden Gast zu liefern.
+Zudem ist Bartholomeus zustandsgesteuert und besitzt die drei Zustände <code>Bestellung aufnehmen</code>, <code>Liefern</code> und <code>Getränke holen</code>. Dementsprechend handelt er von seinen Zuständen abhängig unterschiedlich: Nimmt er aktuell eine Bestellung auf, bewegt er sich in Richtung des Gastes, den er zuvor gewählt hatte. Im Zustand <code>Liefern</code> bringt er sein aktuelles Getränk zum entsprechenden Gast. Holt Bartholomeus aktuell Getränke, ist er auf dem Weg zum nächsten Barfeld, um die zuvor aufgenommene Bestellung vorzubereiten. Verlässt sein aktueller Gast zu einem beliebigen Zeitpunkt die Bar oder hat er noch keinen Gast gewählt, lässt er seinen aktuellen Bestellungsvorgang verfallen und wählt einen neuen Gast zufällig aus der Menge aller Gäste aus.</p>
+<h3 id="enolf-von-pilsner">Enolf von Pilsner</h3>
+<p>Bei Enolf von Pilsner handelt es sich um eine Weiterentwicklung von Bartholomeus von Pilsner.
+Enolf teilt im Gegensatz zu Bartholomeus die Umgebung mit Hilfe eines Quadtrees auf, in dem je nach Anzahl der gewünschten Partitionen auch Felder verbunden und somit größer als die übrigen Felder werden können. Die Partitionen werden auf die Enolf-Instanzen verteilt, um keine Überschneidungen der Zustandsbereiche zu erzeugen und durch kurze Wege der Barkeeper eine gleichmäßige Verteilung der Gäste auf den Tischen zu forcieren. Findet eine Enolf-Instanz keinen Gast in seinem Zustandsbereich, so verfährt sie wie Bartholomeus von Pilsner und wählt einen zufälligen Gast.</p>
+<h3 id="albus-von-pilsner">Albus von Pilsner</h3>
+<p>Albus von Pilsner ist eine Weiterentwicklung von Enolf von Pilsner.
+So handelt Albus genau wie Enolf und teilt die Umgebung in Zuständigkeitsbereiche ein, kann jedoch statt nur einer Bestellung mehrere Betellungen aufnehmen.
+So werden immer mehrere Gäste gewählt, die sich in einem vorher bestimmten Umkreis befinden, um diese zu beliefern.</p>
+<h3 id="hubert-metkrug">Hubert Metkrug</h3>
+<p>Die Wirte des Typs &quot;Hubert Metkrug&quot; verfügen über eine globale <code>order_status</code> Hashmap in welcher offene Bestellungen vermerkt werden. So kann eine Bestellung von einem anderen Wirt bearbeitet werden, als von jenem, der diese aufgenommen hat. Entschließt sich ein Wirt dazu, eine offene Bestellung zu bearbeiten, dann wird diese von der <code>order_status</code> Hashmap entfernt. Dabei wählt der Wirt solange zufällig Bestellungen aus <code>order_status</code> aus, bis seine bei Erzeugung festgelegte <code>capacity</code> erreicht ist, oder keine offenen Bestellungen mehr vorhanden sind. Die so gewählten Gäste werden in eine <code>current_delivery</code> Hashmap eingetragen, um zu verhindern, dass andere Wirte versuchen Bestellungen von diesen Gästen aufzunehmen. Ähnlich der anderen Wirttypen, sind Wirte des Typs <code>Hubert Metkrug</code> zu jeder Zeit in einem bestimmten Zustand. Entweder sie sind im Status <code>IDLE</code> (haben gerade keine Aufgabe), <code>BAR</code> (sind auf dem Weg zu der Theke um Bestellungen zu bearbeiten) oder <code>ORDER</code> (gehen zu einem Gast um eine Bestellung aufzunehmen). Der vierte Status ist nicht explizit benannt und wird immer dann eingenommen, wenn der Wirt gerade Bestellungen zu Gästen bringt. Ob sich ein Wirt dazu entscheidet Bestellungen aufzunehmen, oder zu bearbeiten hängt davon ab, wie viele Gäste ohne offene Bestellung sind. Die Wahrscheinlichkeit Bestellungen zu bearbeiten verhält sich dabei proportional zu dem prozentualen Anteil der Gäste mit offenen Bestellungen. So nehmen Wirte eher Bestellungen auf, wenn viele Gäste noch nichts bestellt haben und bearbeiten Bestellungen eher, wenn viele Gäste auf ihre Bestellung warten. Die Entscheidung, von welchem Gast eine Bestellungen aufgenommen wird, geschieht insofern zufällig, dass zuerst alle Gäste mit offenen Bestellungen, sowie alle Gäste, die gerade bedient werden, gefiltert werden und dann aus den restlichen Gästen zufällig eine Instanz ausgewählt wird.</p>
+<h3 id="gottfried-metkrug">Gottfried Metkrug</h3>
+<p>Die Wirte des Typs &quot;Gottfried Metkrug&quot; teilen den Aufgabenbereich in zwei Gruppen auf. Ein Teil der Wirte nimmt lediglich Bestellungen der Gäste auf und der andere Teil der Wirte bearbeitet ausschließlich Bestellungen. Dies hat zur Folge, dass Wirte nun nicht mehr zufällig zu der Theke gehen, sondern ein Teil der Wirte gar nicht zur Theke geht und der andere Teil entweder an der Bar ist und auf offene Bestllungen wartet, oder gerade Gäste beliefert. Das übliche Verhalten diese Wirttyps gleicht dem Verhalten von &quot;Hubert Metkrug&quot;.</p>
+<h3 id="roland-branntwein">Roland Branntwein</h3>
+<p>Ein Agent vom Typ &quot;Roland&quot; erfüllt die allgemeine Vorgehensweise eines Wirtes, in dem er zunächst die Bestellungsaufnahme (<code>ORDER</code>), dann die Getränkezubereitung (<code>REFILL</code>) und zuletzt die Bestellungslieferung (<code>DELIVER</code>) vornimmt.
+Die Besonderheit dieses Agententyps ist die Anzahl gleichzeitiger Bestellungen, die er in einem Bestellzyklus verarbeiten kann, welche durch einen vorher festgelegten Parameter <code>storageLimit</code> begrenzt wird. Nachdem bei einem neuen Bestellzyklus der erste Gast durch das beste Verhältnis <code>Distanz / Wartezeit</code> ermittelt wurde, errechnen sich folgende Gäste mit selbigem Verhältnis in einer Reichweiteneinschränkung von 20 Feldern auf dem Grid. Dabei ist die metrische Distanz als Luftlinie und die Wartezeit als die vergangenen Zeitschritte, seitdem ein Gast bedient wurde, zu sehen. Um zu vermeiden, dass der Wirt durch diese Berechnung bei einem nicht durstigen Gast (bei Bestellvorgang <code>abgelehnt</code>) so lange wartet, bis dieser ein Getränk bestellt oder ein Gast mit besserem Verhältnis berechnet wird, wird in diesem Fall der Gastagent einer Blacklist <code>unthirstyGuests</code> hinzugefügt, die bei einem neuen Bestellzyklus geleert wird. Gäste auf dieser Blacklist werden bei Bestellvorgang vom Wirt nicht mehr berücksichtigt. Hat die Bestellliste <code>orderList</code> das Limit erreicht oder sind 70 Zeitschritte vergangen, wechselt der Agent in den Zustand <code>REFILL</code>, in dem der kürzeste Weg zum nächsten Thekenelement ermittelt und aufgesucht wird. Vor dem Hinzufügen der Getränke werden alle Gäste von der Bestellliste entfernt, die bereits gegangen sind, bevor der Agent in den Zustand <code>DELIVER</code> wechselt und die Getränke in der Reihenfolge der Bestellungsaufnahme austeilt. Sind keine Gäste in der Bar vorhanden, wechselt der Agent in den Zustand <code>IDLE</code>, in dem er pro Zeitschritt in eine zufällige Richtung geht.</p>
+<h3 id="oswald-branntwein">Oswald Branntwein</h3>
+<p>Ein Agent vom Typ <code>Oswald</code> erfüllt alle Vorgehensweisen, die auch eine Agenteninstanz <code>Roland</code> erfüllt und stellt eine Erweitung dieses Typen dar.
+Die Besonderheit dieses Agententypen ist die <code>Kollektivität</code> mehrerer Agenten im Sinne der Zusammenarbeit.
+Eine gemeinsame Gästeliste, auf die vor der Auswahl des nächsten Gastes zugegriffen wird, sorgt dafür, dass niemals ein bereits bewirteter Gast erneut ausgewählt wird. Ein Gast, der eine Bestellung neu aufgegeben hat, wird dieser Liste <code>guestManageSet</code> hinzugefügt. Intern wird diese Variable als HashSet geführt um doppelte Werte automatisch zu vermeiden. Sind weniger Gäste als Agenten dieses Typs existent, so kann eine mehrfache Bedienung eines Gastes dennoch vorkommen.
+Ein Beispiel hierfür ist der Ausgangszustand der Bar, in dem meist zunächst weniger Gäste als Wirte anwesend sind.</p>
+<hr>
+<h2 id="4-entwufsmuster">4. Entwufsmuster</h2>
+<h3 id="grundprinzipien">Grundprinzipien</h3>
+<p>Es wurde kein vergleichbares Modell in der Vorlesung kennengelernt. Stattdessen handelt es sich um eine Mischung verschiedener in der Vorlesung kennengelernter Modelle. So kommen beispielsweise Ansätze von Räuber-Beute Modellen und Teile des Sugarscape Modells in Kombination mit anderen Modellansätzen zum Einsatz.</p>
+<h3 id="emergenz">Emergenz</h3>
+<p>Das System ist stark emergent. So lässt sich aus der Strategie des gewählten Barkeepers nur schwer bis gar nicht die Güte des Systems bestimmen.</p>
+<h3 id="adaptivit%C3%A4t">Adaptivität</h3>
+<p>Die Adaptivität Agenten ist stark vom Typ abhängig. Während der <code>Zustand</code> des Gastes durch seinen Durstwert festgelegt ist, befinden sich die meisten Wirttypen in einem <code>Zustand</code> eines periodischen Zyklus. Durch Interaktion von Gast und Wirt können sich diese Zustände je nach Situation ändern. Konsumiert der Gast ein Getränk, so sinkt sein Durstwert, der ausschlaggebend für seinen Zustand ist. Zudem wird in dieser Situation - ebenso wie bei Bestellung durch einen Gast - meist eine Zustandänderung des (zuständigen) Wirtes hervorgerufen. Im Detail sind allerdings von Wirt zu Wirt deutliche Unterschiede festzustellen, die durch folgende einzelne Erläuterungen herausgestellt werden sollen.</p>
+<h4 id="gast">Gast</h4>
+<p>Durch die vorher von Parametern festgelegte Erscheinungswahrscheinlichkeit eines Gastes wird ein neuer, zufällig auf einem freien Tisch in der Bar platzierter Agent erstellt.
+Ein Gast hat initial keinen Durst und lehnt in diesem Zustand mit einer parametrisierten Wahrscheinlichkeit Bestellanfragen von Wirt-Agenten ab.
+Ist seine Durstschwelle durch den mit pro Tick ansteigenden Durstwert erreicht, wird bei Bestellanfrage von einem Wirt-Agenten immer ein Getränk bestellt. Ein Gast-Agent wird auf dem Grid verbleiben, bis sein Durstwert die Durstobergrenze erreicht hat.</p>
+<h4 id="albus-von-pilsner">Albus von Pilsner</h4>
+<p>Initial wählt Albus seine als nächstes zu beliefernden Gäste und wechselt in den Zustand <code>Bestellung aufnehmen</code>.
+Hat er alle Bestellungen aufgenommen, wechselt er in den <code>Getränke holen</code> (im Code auch <code>FILL_UP</code>) Zustand, um die aufgenommenen Bestellungen von der Theke zu holen.
+Hat er die Theke erreicht, wechselt er in den <code>Liefern</code> (in Code <code>DELIVER</code>) Zustand, um die Getränke zu den Gästen zu bringen.
+Nach Erreichen der Theke wählt er wieder seine Gäste und wechselt in den <code>Bestellung aufnehmen</code> (im Code <code>TAKE_ORDER</code>) Zustand.
+Auch wenn Seine Gäste das Lokal verlassen, wählt er neue Gäste und wechselt in den <code>Bestellung aufnehmen</code> Zustand.</p>
+<h4 id="bartholomeus-von-pilsner">Bartholomeus von Pilsner</h4>
+<p>Siehe Albus von Pilsner.</p>
+<h4 id="enolf-von-pilsner">Enolf von Pilsner</h4>
+<p>Siehe Albus von Pilsner.</p>
+<h4 id="hubert-metkrug">Hubert Metkrug</h4>
+<p>Da Anfangs keine Gäste (und somit auch keine offenen Bestellungen) vorhanden sind, befinden sich alle Wirte zuerst in dem Zustand <code>IDLE</code> und wechseln in den Zustand <code>ORDER</code>, sobald die ersten Gäste eintreffen. Daraufhin wechseln abhängig von dem Anteil der Gäste mit offenen Bestellungen zufällig einige der Wirte in den Zustand <code>BAR</code>. Nachdem Diese die Getränke an der Bar abgeholt haben, beliefern sie die jeweiligen Gäste und wechseln in den Status <code>IDLE</code>. Es wird dabei in jedem Zeitschritt geprüft, ob sich die zu beliefernden Gäste noch in dem Lokal befinden und falls dies nicht der Fall ist, werden die betroffenen Bestellungen verworfen.</p>
+<h4 id="gottfried-metkrug">Gottfried Metkrug</h4>
+<p>Der eine Teil der Wirte wechselt zwischen dem Zustand <code>ORDER</code>, falls Gäste ohne offene Bestellungen vorhanden sind und <code>IDLE</code>, wenn dies nicht der Fall ist. Der andere Teil der Wirte befindet sich entweder an der Bar (in dem Status <code>BAR</code>), oder beliefert Gäste.</p>
+<h4 id="oswald-branntwein">Oswald Branntwein</h4>
+<p>Siehe Roland Branntwein.</p>
+<h4 id="roland-branntwein">Roland Branntwein</h4>
+<p>Roland befindet sich initial im Zustand <code>IDLE</code>, bis der erste Gast-Agent kreiert wird. Befinden sich Gäste in der Bar, wechselt Roland in den ersten Bestellzyklus, der mit dem Zustand <code>ORDER</code> beginnt. Hier wird zunächst der Gast mit dem höchsten <code>Distanz / Wartezeit</code>-Wert ausgewählt und bewirtet wird, wonach mit gleichem Prinzip weitere Gäste - allerdings in einem Radius von 20 Zellen auf dem Grid - bearbeitet werden bis das <code>storageLimit</code> erreicht ist. Ist dies der Fall, wechselt der Barkeeper erst in den Zustand <code>REFILL</code>, in dem an dem nahesten Thekenelement die Getränke für die Gäste bereitstellt (fiktiv in einer Liste) werden, wonach dieser im Zustand <code>DELIVER</code> anfängt, alle Gäste in Bestellreihenfolge zu beliefern. Dabei werden betroffene Einträge aus den genutzten Listen entfernt, sowie Wartezeiten der bearbeiteten Gäste zurückgesetzt. Wurden alle Gäste (die noch in der Bar verblieben sind) auf der Liste bearbeitet, befindet sich Roland wieder im Ausgangszustand des Bestellzyklus <code>ORDER</code>.</p>
+<h3 id="ziele">Ziele</h3>
+<p>Ein Gast verfolgt das Ziel, nicht zu durstig zu werden, dennoch aber auch nicht durchgehend zu trinken.
+Gleichzeitig wollen Barkeeper die Gäste beliefern und so die Gäste in der Bar halten.</p>
+<h3 id="lernen">Lernen</h3>
+<p>Die Agenten dieses Modells beinhalten keinen Lernprozess.</p>
+<h3 id="vorhersage">Vorhersage</h3>
+<p>Gast-Agenten planen in diesem Modell nicht für die Zukunft und treffen keine Vorhersagen.
+Wirte hingegen entscheiden sich vor Bestellungsvorgang und Belieferung für einen Gast, der als nächstes bearbeitet werden soll. Die Vorgehensweise der einzelnen Wirte ist dabei ungleich, jedoch ähnlich. Somit wird bei Bestellungsaufnahme die Vorhersage &quot;Der Gast wird beliefert werden&quot; getroffen, welche allerdings durch Bestellverhalten des Gastes, sowie durch ein mögliches Verlassen der Bar bei Lieferungsvorgang des Wirtes abweichen können.</p>
+<h3 id="wahrnehmung">Wahrnehmung</h3>
+<h4 id="gast">Gast</h4>
+<p>Der Gast nimmt die Umgebung nicht wahr und agiert nur, wenn seine Durstschwelle überschritten ist, welche das Verlassen der BAr initiiert. Zudem Teilt ein Gast einem Barkeeper sein Wunschgetränk mit, wenn der Barkeeper nach dem Getränk fragt. Außerdem handelt der Gast bei Lieferung seines Getränks, welche jedoch genau wie die Bestellungsaufnahme durch den Barkeeper eingeleitet wird.</p>
+<h4 id="wirt">Wirt</h4>
+<p>Wirte (auch Barkeeper) sehen die gesamte Bar und alle Gäste.
+So haben die Barkeeper nicht die Möglichkeit, sich über Tische zu bewegen und Interagieren nur mit Gästen in ihrer unmittelbaren Umgebung. Diese Interaktion findet entweder im Kontext der Bestellungsaufnahme oder der Getränkeliferung statt.
+Zudem bereiten Wirte bei Erreichen der Bar ihre Bestellungen vor, interagieren dabei jedoch nicht mit der Bar, oder anderen Barkeepern.</p>
+<h3 id="interaktion">Interaktion</h3>
+<p>Interkation zwischen Wirt und Gast findet immer dann statt, wenn ein Wirt sich in Kommunikationsreichweite befindet. Dieser leitet dann den Bestellvorgang durch das Ausführen der Methode <code>handleOrder</code> ein, und erhält bei positiver Antwort das gewünschte Getränk als Rückgabeparameter, bei Ablehnung den Rückgabeparamterwert <code>null</code>. Gleichzeit wird, sobald ein Wirt sich in Kommunikationsreichweite befindet die Methode <code>handleDelivery</code> ausgeführt (d.h. es werden immer beide Methoden ausgeführt, sodass der Umgang mit diesem Verhalten ganz bei dem Wirttypen liegt). Trägt der Wirt ein Getränk für den Gast, der sich in Reichweite befindet, soll diese Interkation dazu führen, dem Gast-Agenten dieses auszuliefern. Um das Modell möglichst einfach zu halten, wird das Getränk bei Auslieferung durch den Wirt unverzüglich und rückstandlos konsumiert.</p>
+<h3 id="stochastik">Stochastik</h3>
+<p>In diesem Modell werden bei Initialisierung, sowie Interaktion verschiedene Werte zufällig festgelegt. Bei der Initialisierung des Lokals wird die Tischdichte durch eine Entstehungswahrscheinlichkeit festgelegt. Nach der Initialisierung ist das Erscheinen der Gäste ebenfalls durch eine Entstehungswahrscheinlich festgelegt. Einige Wirttypen wählen den nächsten zu bearbeitenden Gast ebenfalls mit einem Wahrscheinlichkeitsparamter aus, sowie die Laufrichtung einiger Wirttypen sobald diese sich im Zustand <code>IDLE</code> befinden.
+Ist der Durstwert eines Gastes noch unter seiner Durstschwelle, so ist bei Bestellungsaufnahme durch den Wirt durch eine Wahrscheinlichkeit von 50% eine positive Rückmeldung möglich, obwohl der Gast in diesem Fall keinen Durst hat.</p>
+<h3 id="beobachtung">Beobachtung</h3>
+<p>Um das System zu beobachten, wird die Gäste- und Barkeeperzahl über alle Zeitschritte mitgeschrieben.
+Dies wird sowohl in einem Graphen in Repast Simphony, als auch bei Batch runs eingesetzt.
+Die Ergebnisse der Batch runs werden mit Hilfe des Tabellenkaluationsprogramms Excel ausgewertet, um Gästeanzahlen und Standardabweichung der Gästeanzahlen zu bestimmen.</p>
+<hr>
+<h2 id="5-initialisierung">5. Initialisierung</h2>
+<p>Bei Initialisierung der Bar werden folgende Paramter zuvor festgelegt:</p>
+<ul>
+<li>Erstellungsdichte der Tische vor Beginn der Simulation</li>
+<li>Anzahl der Wirte je nach Wirttyp</li>
+<li>je nach Wirttyp unterschiedliche Strategieparameter</li>
+<li>Erscheinungswahrscheinlichkeit für Gäste</li>
+<li>Umgebungsgröße (Höhe und Breite der Bar)</li>
+</ul>
+<hr>
+<h2 id="6-eingabedaten">6. Eingabedaten</h2>
+<p>Es existieren keine Eingabedaten externer Quellen.</p>
+<hr>
+<h2 id="7-submodelle">7. Submodelle</h2>
+<p>Submodelle sind nicht vorhanden und würden in diesem Umfeld den Rahmen sprengen.</p>
+<h2 id="8-ergebnisse">8. Ergebnisse</h2>
+<p>Hier werden unsere Ergebnisse des Modells knapp ausgewertet.
+Um dies zu erreichen, wird zuerst zu jedem Barkeeper-Typ die durchschnittliche Gästeanzahl und die Standardabweichung der Gästezahlen nach 3000 Zeitschritten, also nach Einpendeln der Gästeanzahl, in Abhöngigkeit von der Barkeeperzahl aufgezeigt und anschließend die durchschnittliche Gästeanzahl in Abhängigkeit von der Barkeeperzahl aller Barkeeper-Typen verglichen. Allen Diegrammen wurden Trendlinien eingezeichnet, um eine Darstellung zu vereinfachen.</p>
+<h3 id="roland-branntwein">Roland Branntwein</h3>
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/RolandBranntwein1.png" />
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/RolandBranntwein2.png" />
+<p>Die mittlere Gästezahl nach 3000 Schritten wächst bei Roland Branntwein in Abhängigkeit von der Barkeeperzahl beschränkt gegen etwa die Hälfte der maximalen Gastkapazität. Gleichzeitig nimmt die Standardabweichung mit zunehmender Barkeeperzahl ab uns hält sich dann etwa in einem Bereich von 4 auf.</p>
+<h3 id="oswald-branntwein">Oswald Branntwein</h3>
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/OswaldBranntwein1.png" />
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/OswaldBranntwein2.png" />
+<p>Die mittlere Gästezahl von Oswald wächst ähnlich zu der von Roland Branntwein, hat jedoch einen höheren Grenzwert. Gleichzeitig bleibt die Standardabweichung konstant.</p>
+<h3 id="hubert-metkrug">Hubert Metkrug</h3>
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/HubertMetkrug1.png" />
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/HubertMetkrug2.png" />
+<p>Genau wie Oswald und Roland, weist Hubert Metkrug ein scheinbar begrenztes Wachstum auf. Dabei ist die Effizienz bei höherer Barkeeperzahl jedoch höher als bei Roland und Oswald. Gleichzeitig ist die Standardabweichung jedoch größer als die von Roland uns Oswald, was auf eine instabilere Gastverteilung hinweist.</p>
+<h3 id="gottfried-metkrug">Gottfried Metkrug</h3>
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/GottfriedMetkrug1.png" />
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/GottfriedMetkrug2.png" />
+<p>Rottfried Metkrug scheint eine lineare Skalierung mit zunehmender Barkeeperzahl aufzuweisen. Dabei ist die Effizienz die bisher schlechteste. Zudem zeigt Gottfried ähnlich wie Hubert eine starke Schwankung der Gstanzahl.</p>
+<h3 id="bartholomeus-von-pilsner">Bartholomeus von Pilsner</h3>
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/BartholomeusVonPilsner1.png" />
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/BartholomeusVonPilsner2.png" />
+<p>Bartholomeus von Pilsner zeigt eine ähnliche Skalierung wie Gorrfried Metkrug und gehört ebenfalls zu den in dem Bessbereich ineffizientesten Barkeepern. Dabei sind die Ergebnisse der Gastanzahl jedoch konsistender, sprich die Ergebnisse der verschiedenen Durchläufe schwanken nicht so stark und befinden sich strikt nah an der Trendlinie. Dennoch schwankt die Gästeanzahl innerhalb eines Durchlaufs ähnlch zu Gottfried Metkrug mit am stärksten.</p>
+<h3 id="enolf-von-pilsner">Enolf von Pilsner</h3>
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/EnolfVonPilsner1.png" />
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/EnolfVonPilsner2.png" />
+<p>Enolf von Pilsner stellt eine starke Verbesserzng zu Bartholomeus von Pilsner dar.
+So steigt die Effizienz auf ein ähnliches Niveau wie Hubert Metkrug und ist bei hohen Barkeeperzahlen etwas Leistungsfähiger als Hubert. Ähnlich wie Roland nimmt die Schwankung mit zunehmender Barkeeperzahl ab und hält sich in einem mit Roland vergleichbaren Bereich auf.</p>
+<h3 id="albus-von-pilsner">Albus von Pilsner</h3>
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/AlbusVonPilsner1.png" />
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/AlbusVonPilsner2.png" />
+<p>Albus zeichnet sich wie die meisten anderen Barkeeper durch ein begrenztes Wachswum aus.
+Dabei befindes sich der Grenszwert jedoch nah an der maximalen Gästeanzahl und zeichnet sich somit durch seine hohe Effizienz aus.
+Die Standardabweichung der Gästeanzahl nimmer zeitgleich am stärksten aller Modelle ab und endet am ende des Messbereichts bei einem tiefstwert von etwa 3.</p>
+<h3 id="kombiniert">Kombiniert</h3>
+<img src="file:///c%3A/Users/chris/Documents/Uni/ASW-RBM/BartenderProblem/odd/combinedResult.png" />
+<p>Allgemein ist zu erkennen, dass die Stategie des Albus von Pilsner eine herausragende Leistungsfähigkeit zeigt und somit mit Abstand die größte Gastzahl bietet.
+Zudem Skaliert die Strategie von Albus von Pilsner besser alls alle andere Strategien mit zunehmender Barkeeperzahl und läuft dabei gegen die maximal mögliche Gastanzahl.
+Denoch fällt auf, dass andere Strategien, wie die von Gottfried Metkrug scheinbar linear skalieren. Dabei stellt sich die Frage, ob dies bei weiter zunehmender Barkeeperzahl weiterhin der Fall sein wird und irgendwann die die maximale Gastanzahl erreicht wird. Dennoch ist die Effizenz auch dieser Strategien ab einer Barkeeperzahl von etwa zehn nicht annähernd so gut, wie die des Albus von Pilsner.</p>
+<p>Demnach stellt sich die Strategie von Albus von Pilsner als die beste Gefundene heraus.</p>
+
+    </body>
+    </html>

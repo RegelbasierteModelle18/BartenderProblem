@@ -80,7 +80,7 @@ Es wurde kein vergleichbares Modell in der Vorlesung kennengelernt. Stattdessen 
 Das System ist stark emergent. So lässt sich aus der Strategie des gewählten Barkeepers nur schwer bis gar nicht die Güte des Systems bestimmen.
 
 ### Adaptivität
-- von Agent abhängig
+Die Adaptivität Agenten ist stark vom Typ abhängig. Während der `Zustand` des Gastes durch seinen Durstwert festgelegt ist, befinden sich die meisten Wirttypen in einem `Zustand` eines periodischen Zyklus. Durch Interaktion von Gast und Wirt können sich diese Zustände je nach Situation ändern. Konsumiert der Gast ein Getränk, so sinkt sein Durstwert, der ausschlaggebend für seinen Zustand ist. Zudem wird in dieser Situation - ebenso wie bei Bestellung durch einen Gast - meist eine Zustandänderung des (zuständigen) Wirtes hervorgerufen. Im Detail sind allerdings von Wirt zu Wirt deutliche Unterschiede festzustellen, die durch folgende einzelne Erläuterungen herausgestellt werden sollen.
 
 #### Gast
 Durch die vorher von Parametern festgelegte Erscheinungswahrscheinlichkeit eines Gastes wird ein neuer, zufällig auf einem freien Tisch in der Bar platzierter Agent erstellt.
